@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NutriCampus - Health & Nutrition Awareness | NHCE CSE</title>
+  <meta name="description" content="A student-friendly Health and Nutrition Awareness Web Application developed for New Horizon College of Engineering (Course 25CPD37). Features balanced diet tips, BMI calculator, water tracker, and wellness quiz.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-light">
+  <!-- Disclaimer Notice Top Bar -->
+  <aside class="top-banner" role="complementary">
+    <div class="container banner-inner">
+      <span class="badge-pill">NHCE • CSE Dept • 25CPD37</span>
+      <p class="banner-text">
+        <strong>Community Project:</strong> Educational health & nutrition awareness for college students. <em>Non-diagnostic screening only.</em>
+      </p>
+    </div>
+  </aside>
+
+  <!-- Main Navigation Header -->
+  <header class="site-header" id="header">
+    <div class="container nav-container">
+      <a href="#home" class="brand-logo" id="brandLogo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            <circle cx="12" cy="12" r="10"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-title">Nutri<span>Campus</span></span>
+          <span class="logo-sub">NHCE CSE • Innovation &amp; Design</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="nav-menu" id="navMenu" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li><a href="#home" class="nav-link active" data-tab="home">Home</a></li>
+          <li><a href="#nutrition" class="nav-link" data-tab="nutrition">Nutrition Guide</a></li>
+          <li><a href="#bmi" class="nav-link" data-tab="bmi">BMI Calculator</a></li>
+          <li><a href="#tracker" class="nav-link" data-tab="tracker">Water Tracker</a></li>
+          <li><a href="#habits" class="nav-link" data-tab="habits">Healthy Habits</a></li>
+          <li><a href="#quiz" class="nav-link" data-tab="quiz">Nutrition Quiz</a></li>
+          <li><a href="#feedback" class="nav-link" data-tab="feedback">Feedback</a></li>
+        </ul>
+      </nav>
+
+      <!-- Utility Controls -->
+      <div class="nav-actions">
+        <button id="themeToggleBtn" class="icon-btn" aria-label="Toggle Dark/Light Mode" title="Toggle Theme">
+          <svg class="sun-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <button id="mobileMenuBtn" class="icon-btn hamburger-btn" aria-label="Toggle navigation menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="drawer-header">
+      <span class="drawer-title">Navigation</span>
+      <button id="closeDrawerBtn" class="close-btn">&times;</button>
+    </div>
+    <ul class="drawer-list">
+      <li><a href="#home" class="drawer-link active" data-tab="home">🏠 Home &amp; Overview</a></li>
+      <li><a href="#nutrition" class="drawer-link" data-tab="nutrition">🥗 Nutrition &amp; Diet Guide</a></li>
+      <li><a href="#bmi" class="drawer-link" data-tab="bmi">⚖️ BMI Calculator</a></li>
+      <li><a href="#tracker" class="drawer-link" data-tab="tracker">💧 Daily Water Tracker</a></li>
+      <li><a href="#habits" class="drawer-link" data-tab="habits">⚡ Healthy Habits for College</a></li>
+      <li><a href="#quiz" class="drawer-link" data-tab="quiz">🧠 Nutrition Quiz</a></li>
+      <li><a href="#feedback" class="drawer-link" data-tab="feedback">📝 Usability Feedback</a></li>
+    </ul>
+  </div>
+  <div class="backdrop" id="backdrop"></div>
+
+  <!-- Main Content Sections Container -->
+  <main class="main-content" id="mainContent">
+
+    <!-- TAB 1: HOME / OVERVIEW -->
+    <section class="page-tab active" id="tab-home">
+      <!-- Hero Section -->
+      <div class="hero-section">
+        <div class="container hero-grid">
+          <div class="hero-content">
+            <div class="sub-badge">
+              <span class="pulse-dot"></span>
+              Community Project • Innovation &amp; Design Thinking
+            </div>
+            <h1 class="hero-title">
+              Health &amp; Nutrition Awareness for <span>College Students</span>
+            </h1>
+            <p class="hero-lead">
+              Balancing classes, coding labs, exams, and hostel food can be overwhelming. NutriCampus delivers student-friendly nutrition guides, smart hydration tracking, and interactive health awareness tools crafted specifically for undergraduate life.
+            </p>
+            <div class="hero-actions">
+              <a href="#nutrition" class="btn btn-primary" data-tab="nutrition">
+                Explore Nutrition Guide
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+              <a href="#bmi" class="btn btn-outline" data-tab="bmi">
+                Check Your BMI
+              </a>
+              <a href="#tracker" class="btn btn-outline" data-tab="tracker">
+                💧 Track Water
+              </a>
+            </div>
+
+            <!-- Highlights Chips -->
+            <div class="hero-stats">
+              <div class="stat-item">
+                <span class="stat-number">2.5 L</span>
+                <span class="stat-label">Daily Hydration Target</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">5</span>
+                <span class="stat-label">Core Food Groups</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Student-Friendly &amp; Free</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <div class="hero-card-preview">
+              <div class="preview-badge">Student Wellness Hub</div>
+              <div class="plate-illustration">
+                <div class="plate-circle">
+                  <div class="plate-quarter q-veggies"><span>50% Veggies &amp; Fruits</span></div>
+                  <div class="plate-quarter q-carbs"><span>25% Whole Grains</span></div>
+                  <div class="plate-quarter q-protein"><span>25% Protein &amp; Pulses</span></div>
+                  <div class="plate-center-cup"><span>🥛 Water / Curd</span></div>
+                </div>
+              </div>
+              <div class="preview-tips">
+                <div class="tip-card">
+                  <div class="tip-icon">💡</div>
+                  <div class="tip-info">
+                    <strong>Hostel &amp; Canteen Tip:</strong>
+                    <span>Pair your canteen dosa/poha with boiled sprouts, peanuts, or fresh buttermilk!</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Problem Statement & Objectives Summary Card Grid -->
+      <section class="section-padding bg-alt">
+        <div class="container">
+          <div class="section-header text-center">
+            <span class="section-tag">Project Overview</span>
+            <h2 class="section-title">Why Health Awareness Matters in College</h2>
+            <p class="section-subtitle">
+              Irregular meal times, late-night study sessions, and reliance on unverified internet fads make college students susceptible to energy crashes and poor nutrition.
+            </p>
+          </div>
+
+          <div class="card-grid-3">
+            <div class="feature-card">
+              <div class="feature-icon bg-green-light">🥗</div>
+              <h3>1. Nutrition Education</h3>
+              <p>Demystifying carbohydrates, proteins, healthy fats, and fiber with budget-friendly college foods like dal, eggs, curd, bananas, and groundnuts.</p>
+              <a href="#nutrition" class="card-arrow-link" data-tab="nutrition">Learn more &rarr;</a>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon bg-blue-light">⚖️</div>
+              <h3>2. Body Mass Index (BMI)</h3>
+              <p>Simple screening metric to understand weight ranges with essential medical disclaimers emphasizing that BMI is not a clinical diagnosis.</p>
+              <a href="#bmi" class="card-arrow-link" data-tab="bmi">Calculate now &rarr;</a>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon bg-cyan-light">💧</div>
+              <h3>3. Smart Hydration Log</h3>
+              <p>Track your daily water intake with visual fill progress, customized goals, and reminders to prevent screen headaches and lecture fatigue.</p>
+              <a href="#tracker" class="card-arrow-link" data-tab="tracker">Start tracking &rarr;</a>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon bg-amber-light">🧠</div>
+              <h3>4. Nutrition Awareness Quiz</h3>
+              <p>Test your knowledge with 7 interactive questions busting common diet myths with immediate scientific explanations.</p>
+              <a href="#quiz" class="card-arrow-link" data-tab="quiz">Take quiz &rarr;</a>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon bg-purple-light">⚡</div>
+              <h3>5. Healthy Habits &amp; Routines</h3>
+              <p>Actionable advice on handling exam stress eating, screen fatigue in computer labs, sleep hygiene, and easy desk stretches.</p>
+              <a href="#habits" class="card-arrow-link" data-tab="habits">Explore habits &rarr;</a>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon bg-rose-light">📋</div>
+              <h3>6. Usability &amp; Community Feedback</h3>
+              <p>Evaluation portal for college student volunteers to test the website, rate usability, and help refine health resources.</p>
+              <a href="#feedback" class="card-arrow-link" data-tab="feedback">Share feedback &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Department & College Project Box -->
+      <section class="section-padding">
+        <div class="container">
+          <div class="academic-box">
+            <div class="academic-header">
+              <div class="academic-titles">
+                <span class="inst-name">NEW HORIZON COLLEGE OF ENGINEERING</span>
+                <span class="dept-name">Department of Computer Science and Engineering</span>
+                <span class="course-code">Course: Community Project using Innovation and Design Thinking (25CPD37)</span>
+              </div>
+            </div>
+            <div class="academic-meta-grid">
+              <div class="academic-meta-card">
+                <strong>Target Community:</strong>
+                <span>Undergraduate college students, campus clubs, hostel residents</span>
+              </div>
+              <div class="academic-meta-card">
+                <strong>Project Duration:</strong>
+                <span>Sep 2026 – Dec 2026 (Semester III)</span>
+              </div>
+              <div class="academic-meta-card">
+                <strong>Methodology:</strong>
+                <span>Design Thinking, Agile Prototyping, Usability Testing</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+
+    <!-- TAB 2: NUTRITION GUIDE -->
+    <section class="page-tab" id="tab-nutrition">
+      <div class="container section-padding">
+        <div class="section-header">
+          <span class="section-tag">Educational Module</span>
+          <h2 class="section-title">Balanced Nutrition for College Life</h2>
+          <p class="section-subtitle">
+            Understand how each nutrient fuels your cognitive stamina, immune defense, and daily physical vitality with real, accessible foods.
+          </p>
+        </div>
+
+        <!-- The Balanced Student Plate Visualizer -->
+        <div class="balanced-plate-banner">
+          <div class="plate-text">
+            <h3>🍽️ The 50-25-25 Balanced Plate Guide</h3>
+            <p>A simple visual rule endorsed by public health guidelines (like Harvard Healthy Eating Plate &amp; ICMR National Institute of Nutrition) that does not require calorie counting:</p>
+            <ul class="plate-bullets">
+              <li><strong>50% Plate:</strong> Colorful vegetables, leafy greens, cucumber, and fresh fruits (Fiber, Micronutrients).</li>
+              <li><strong>25% Plate:</strong> Whole grains such as brown/parboiled rice, roti, millets, oats (Sustained energy).</li>
+              <li><strong>25% Plate:</strong> Quality protein such as dal, chickpeas, paneer, eggs, curd, or lean meats (Muscle &amp; satiety).</li>
+              <li><strong>Sides:</strong> A bowl of curd/buttermilk and plenty of clean drinking water.</li>
+            </ul>
+          </div>
+          <div class="plate-graphic-box">
+            <div class="interactive-plate">
+              <div class="plate-segment seg-veg">
+                <span>🥦 50% Veggies &amp; Fruits</span>
+              </div>
+              <div class="plate-segment seg-grain">
+                <span>🌾 25% Grains</span>
+              </div>
+              <div class="plate-segment seg-protein">
+                <span>🍳 25% Protein</span>
+              </div>
+              <div class="plate-badge-water">💧 Water &amp; Curd</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Food Groups Tab Filter -->
+        <div class="food-groups-section">
+          <h3 class="subsection-title">Explore Essential Food Groups</h3>
+          <div class="group-filters">
+            <button class="filter-chip active" data-filter="all">All Groups</button>
+            <button class="filter-chip" data-filter="carbs">⚡ Carbohydrates</button>
+            <button class="filter-chip" data-filter="proteins">💪 Proteins</button>
+            <button class="filter-chip" data-filter="fats">🥑 Healthy Fats</button>
+            <button class="filter-chip" data-filter="vitamins">🍊 Vitamins &amp; Minerals</button>
+            <button class="filter-chip" data-filter="hydration">💧 Hydration &amp; Fiber</button>
+          </div>
+
+          <div class="food-cards-grid" id="foodCardsGrid">
+            <!-- Card 1: Carbs -->
+            <div class="food-card" data-category="carbs">
+              <div class="card-badge carbs">Carbohydrates</div>
+              <h4>Complex Carbohydrates (Primary Energy)</h4>
+              <p class="food-desc">Fuel your brain for lecture focus and late study sessions. Complex carbs release glucose steadily into the bloodstream without sudden insulin spikes.</p>
+              <div class="food-examples">
+                <strong>Best Student Sources:</strong>
+                <ul>
+                  <li>Whole wheat rotis, parboiled rice</li>
+                  <li>Millets (Ragi, Jowar, Foxtail)</li>
+                  <li>Rolled oats, Poha with veggies</li>
+                  <li>Sweet potatoes, boiled corn</li>
+                </ul>
+              </div>
+              <div class="student-tip">
+                <em>💡 Avoid:</em> Relying solely on refined flour (maida) bakery items and sugary cookies which lead to quick drowsiness.
+              </div>
+            </div>
+
+            <!-- Card 2: Proteins -->
+            <div class="food-card" data-category="proteins">
+              <div class="card-badge proteins">Proteins</div>
+              <h4>Proteins (Building Blocks &amp; Satiety)</h4>
+              <p class="food-desc">Essential for cell repair, immune strength, neurotransmitter synthesis, and keeping hunger at bay during back-to-back classes.</p>
+              <div class="food-examples">
+                <strong>Budget-Friendly Student Sources:</strong>
+                <ul>
+                  <li>Boiled eggs, egg bhurji</li>
+                  <li>Lentils, Dal, Rajma, Chole</li>
+                  <li>Sprouts (Moong, Kala Chana)</li>
+                  <li>Paneer, Tofu, Greek/Plain Curd</li>
+                  <li>Roasted peanuts &amp; roasted chana</li>
+                </ul>
+              </div>
+              <div class="student-tip">
+                <em>💡 Hostel Hack:</em> Keep a box of roasted chana and peanuts at your study desk for affordable, mess-free protein.
+              </div>
+            </div>
+
+            <!-- Card 3: Healthy Fats -->
+            <div class="food-card" data-category="fats">
+              <div class="card-badge fats">Healthy Fats</div>
+              <h4>Healthy Fats (Brain &amp; Hormone Support)</h4>
+              <p class="food-desc">The human brain is 60% fat! Good fats (monounsaturated &amp; polyunsaturated) absorb fat-soluble vitamins (A, D, E, K) and support long-term memory.</p>
+              <div class="food-examples">
+                <strong>Smart Sources:</strong>
+                <ul>
+                  <li>Walnuts, almonds, peanuts</li>
+                  <li>Sunflower seeds, chia seeds</li>
+                  <li>Moderate ghee &amp; mustard/olive oil</li>
+                  <li>Naturally occurring fats in eggs &amp; dairy</li>
+                </ul>
+              </div>
+              <div class="student-tip">
+                <em>💡 Swap:</em> Replace deep-fried evening street samosas with a handful of roasted peanuts or dry fruits.
+              </div>
+            </div>
+
+            <!-- Card 4: Vitamins & Minerals -->
+            <div class="food-card" data-category="vitamins">
+              <div class="card-badge vitamins">Micronutrients</div>
+              <h4>Vitamins &amp; Minerals (Immune Shield)</h4>
+              <p class="food-desc">Iron prevents fatigue and brain fog; Vitamin C boosts iron absorption; Vitamin D and Calcium safeguard bone strength under indoor academic schedules.</p>
+              <div class="food-examples">
+                <strong>Top Sources:</strong>
+                <ul>
+                  <li>Spinach, moringa, seasonal greens (Iron &amp; Folate)</li>
+                  <li>Oranges, amla, lemon, guava (Vitamin C)</li>
+                  <li>Milk, fortified dahi, sesame seeds (Calcium)</li>
+                  <li>Carrots, pumpkin (Vitamin A for screen fatigue)</li>
+                </ul>
+              </div>
+              <div class="student-tip">
+                <em>💡 Quick Fix:</em> Squeeze a fresh lemon over your canteen dal or poha to dramatically increase non-heme iron absorption!
+              </div>
+            </div>
+
+            <!-- Card 5: Hydration & Fiber -->
+            <div class="food-card" data-category="hydration">
+              <div class="card-badge hydration">Fiber &amp; Water</div>
+              <h4>Dietary Fiber &amp; Fluid Balance</h4>
+              <p class="food-desc">Fiber promotes healthy gut microbiota, prevents hostel-induced constipation, and stabilizes blood sugar. Proper hydration prevents morning headaches.</p>
+              <div class="food-examples">
+                <strong>Everyday Sources:</strong>
+                <ul>
+                  <li>Apples, bananas, papayas, seasonal fruits</li>
+                  <li>Cucumber &amp; tomato salads before lunch</li>
+                  <li>Tender coconut water, unsalted chaas (buttermilk)</li>
+                  <li>Clear vegetable soups &amp; plain water</li>
+                </ul>
+              </div>
+              <div class="student-tip">
+                <em>💡 Rule of Thumb:</em> Drink a glass of water before each meal and keep a reusable bottle in your college backpack.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Campus Food Swaps Guide -->
+        <div class="swaps-container">
+          <h3 class="subsection-title">Campus Canteen &amp; Hostel Food Swaps</h3>
+          <p class="subsection-lead">Practical, realistic swaps for college students without breaking your student budget:</p>
+
+          <div class="swap-table-wrapper">
+            <table class="swap-table">
+              <thead>
+                <tr>
+                  <th>Instead of... (High sodium / sugar)</th>
+                  <th>Try Choosing... (Nutrient-rich student swap)</th>
+                  <th>Why it benefits your academic day</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>🍜 Daily 2-minute instant noodles</td>
+                  <td>🥣 Veggie poha, upma, or oats with peanuts</td>
+                  <td>More sustained fiber &amp; protein; prevents the 1-hour sugar crash during classes.</td>
+                </tr>
+                <tr>
+                  <td>🥤 Packaged sugary fizzy drinks &amp; juice cartons</td>
+                  <td>🥛 Fresh buttermilk (chaas), nimbu pani, or tender coconut</td>
+                  <td>Cools the digestive tract, hydrates naturally with electrolytes, zero synthetic fructose.</td>
+                </tr>
+                <tr>
+                  <td>🍟 Greasy deep-fried fried samosa / pakodas</td>
+                  <td>🥜 Steamed sweet corn, boiled chana chaat, or roasted makhana</td>
+                  <td>Light on the stomach, no sluggishness before afternoon laboratory sessions.</td>
+                </tr>
+                <tr>
+                  <td>☕ 4+ cups of high-sugar coffee/energy drinks</td>
+                  <td>🍵 Green tea, warm lemon water, or cold water refills</td>
+                  <td>Reduces exam jitteriness, prevents dehydration-induced tachycardia and sleep disturbances.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- TAB 3: BMI CALCULATOR -->
+    <section class="page-tab" id="tab-bmi">
+      <div class="container section-padding">
+        <div class="section-header">
+          <span class="section-tag">Interactive Screening Tool</span>
+          <h2 class="section-title">Body Mass Index (BMI) Calculator</h2>
+          <p class="section-subtitle">
+            Calculate your screening index from height and weight. Please read the essential context on what BMI can and cannot measure.
+          </p>
+        </div>
+
+        <!-- Disclaimer Callout Box (Crucial for Synopsis Requirements) -->
+        <div class="disclaimer-callout">
+          <div class="disclaimer-icon">⚠️</div>
+          <div class="disclaimer-text">
+            <strong>Important Educational Disclaimer:</strong>
+            <p>
+              Body Mass Index (BMI) is a simple ratio (\(weight / height^2\)) designed for population-level screening. 
+              <strong>BMI is NOT a medical diagnosis</strong> of body fat, cardiovascular health, or fitness. It does not differentiate between muscle mass, bone density, or water retention. Highly active athletes or students with higher muscle mass may show a higher BMI while being in peak health. Always consult qualified college health center personnel or a physician for personal medical assessments.
+            </p>
+          </div>
+        </div>
+
+        <div class="bmi-grid">
+          <!-- Calculator Input Card -->
+          <div class="bmi-form-card">
+            <div class="unit-toggle-group">
+              <button class="unit-toggle-btn active" id="metricUnitBtn">Metric (cm, kg)</button>
+              <button class="unit-toggle-btn" id="imperialUnitBtn">Imperial (ft/in, lbs)</button>
+            </div>
+
+            <form id="bmiForm" class="bmi-form">
+              <!-- Metric Fields -->
+              <div id="metricFields">
+                <div class="input-field">
+                  <label for="metricHeight">Height in Centimeters (cm)</label>
+                  <div class="input-with-affix">
+                    <input type="number" id="metricHeight" placeholder="e.g. 172" min="80" max="250" step="0.5" required>
+                    <span class="affix">cm</span>
+                  </div>
+                  <span class="field-hint">Average college height: 150 - 185 cm</span>
+                </div>
+
+                <div class="input-field">
+                  <label for="metricWeight">Weight in Kilograms (kg)</label>
+                  <div class="input-with-affix">
+                    <input type="number" id="metricWeight" placeholder="e.g. 64" min="25" max="220" step="0.5" required>
+                    <span class="affix">kg</span>
+                  </div>
+                  <span class="field-hint">e.g. 50 - 80 kg</span>
+                </div>
+              </div>
+
+              <!-- Imperial Fields -->
+              <div id="imperialFields" class="hidden">
+                <div class="input-row">
+                  <div class="input-field">
+                    <label for="imperialFeet">Height (Feet)</label>
+                    <div class="input-with-affix">
+                      <input type="number" id="imperialFeet" placeholder="5" min="3" max="8">
+                      <span class="affix">ft</span>
+                    </div>
+                  </div>
+                  <div class="input-field">
+                    <label for="imperialInches">Height (Inches)</label>
+                    <div class="input-with-affix">
+                      <input type="number" id="imperialInches" placeholder="8" min="0" max="11">
+                      <span class="affix">in</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="input-field">
+                  <label for="imperialWeight">Weight in Pounds (lbs)</label>
+                  <div class="input-with-affix">
+                    <input type="number" id="imperialWeight" placeholder="140" min="50" max="450" step="1">
+                    <span class="affix">lbs</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-btn-row">
+                <button type="submit" class="btn btn-primary" id="calcBmiBtn">
+                  Calculate BMI
+                </button>
+                <button type="button" class="btn btn-secondary" id="resetBmiBtn">
+                  Reset
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Output Results Card -->
+          <div class="bmi-result-card" id="bmiResultContainer">
+            <div class="result-placeholder" id="bmiPlaceholder">
+              <div class="placeholder-icon">📊</div>
+              <h3>Enter your measurements</h3>
+              <p>Your calculated BMI score, category interpretation, and healthy weight estimates will display here.</p>
+            </div>
+
+            <div class="result-display hidden" id="bmiActiveResult">
+              <div class="bmi-score-header">
+                <span class="score-label">Your Calculated BMI</span>
+                <div class="score-val" id="bmiValueDisplay">22.4</div>
+                <div class="score-category-badge" id="bmiCategoryBadge">Normal / Healthy Weight</div>
+              </div>
+
+              <!-- Interactive BMI Gauge Bar -->
+              <div class="bmi-visual-meter">
+                <div class="meter-bar">
+                  <div class="meter-segment s-under" title="Underweight (&lt; 18.5)"></div>
+                  <div class="meter-segment s-normal" title="Normal (18.5 - 24.9)"></div>
+                  <div class="meter-segment s-over" title="Overweight (25 - 29.9)"></div>
+                  <div class="meter-segment s-obese" title="Obese (&gt;= 30)"></div>
+                </div>
+                <div class="meter-pointer" id="meterPointer" style="left: 35%;">
+                  <div class="pointer-arrow">▲</div>
+                </div>
+                <div class="meter-labels">
+                  <span>&lt; 18.5</span>
+                  <span>18.5 - 24.9</span>
+                  <span>25 - 29.9</span>
+                  <span>&ge; 30</span>
+                </div>
+              </div>
+
+              <!-- Healthy Range Estimate -->
+              <div class="bmi-insights">
+                <div class="insight-row">
+                  <span class="insight-label">Estimated Healthy Range for your height:</span>
+                  <strong class="insight-value" id="healthyRangeText">54.5 kg – 73.5 kg</strong>
+                </div>
+                <div class="insight-explanation" id="bmiExplanationText">
+                  Your BMI falls within the typical healthy range for standard population references. Focus on maintaining a varied diet, drinking enough water, and staying physically active.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BMI Reference Table Card -->
+        <div class="bmi-info-table-card">
+          <h3>WHO Standard BMI Categories for Adults</h3>
+          <div class="table-responsive">
+            <table class="info-table">
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>BMI Range (kg/m²)</th>
+                  <th>Educational Interpretation</th>
+                  <th>Recommended Healthy Habits</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="badge-dot dot-blue"></span> Underweight</td>
+                  <td>&lt; 18.5</td>
+                  <td>May indicate insufficient calorie/protein intake or high metabolic burn.</td>
+                  <td>Focus on nutrient-dense foods: nuts, bananas, dairy/soy, lentils, whole grains. Avoid skipping meals.</td>
+                </tr>
+                <tr>
+                  <td><span class="badge-dot dot-green"></span> Normal Weight</td>
+                  <td>18.5 – 24.9</td>
+                  <td>Generally associated with lower risk of chronic lifestyle ailments.</td>
+                  <td>Maintain regular hydration, 150 mins weekly physical activity, and balanced meal proportions.</td>
+                </tr>
+                <tr>
+                  <td><span class="badge-dot dot-amber"></span> Overweight</td>
+                  <td>25.0 – 29.9</td>
+                  <td>Higher ratio of weight to height; note that muscular students may also fall here.</td>
+                  <td>Incorporate daily brisk walks across campus, reduce sweetened beverages, add fresh salads before meals.</td>
+                </tr>
+                <tr>
+                  <td><span class="badge-dot dot-red"></span> Obesity Range</td>
+                  <td>&ge; 30.0</td>
+                  <td>Increased correlation with insulin resistance and joint stress over time.</td>
+                  <td>Gradual lifestyle adjustments: consulting a healthcare professional, avoiding crash diets, building consistent activity.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- TAB 4: WATER TRACKER -->
+    <section class="page-tab" id="tab-tracker">
+      <div class="container section-padding">
+        <div class="section-header">
+          <span class="section-tag">Interactive Daily Tool</span>
+          <h2 class="section-title">Daily Hydration Tracker</h2>
+          <p class="section-subtitle">
+            Mild dehydration impairs concentration, increases reaction time in coding labs, and triggers tension headaches. Track your water glasses throughout the day.
+          </p>
+        </div>
+
+        <div class="tracker-layout">
+          <!-- Visual Bottle Container -->
+          <div class="bottle-visual-card">
+            <div class="bottle-wrapper">
+              <div class="water-bottle" id="waterBottle">
+                <!-- Cap -->
+                <div class="bottle-cap"></div>
+                <!-- Body -->
+                <div class="bottle-body">
+                  <div class="liquid-fill" id="liquidFill" style="height: 0%;">
+                    <div class="wave wave-back"></div>
+                    <div class="wave wave-front"></div>
+                  </div>
+                  <!-- Measurement ticks -->
+                  <div class="bottle-ticks">
+                    <span>100%</span>
+                    <span>75%</span>
+                    <span>50%</span>
+                    <span>25%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bottle-stats">
+              <div class="consumed-display">
+                <span class="big-ml" id="consumedDisplay">0</span>
+                <span class="slash-target">/ <span id="targetDisplay">2500</span> ml</span>
+              </div>
+              <div class="percent-chip" id="percentDisplay">0% Reached</div>
+              <p class="status-msg" id="statusMessage">Start hydrating! Take a sip to kick off your day.</p>
+            </div>
+          </div>
+
+          <!-- Controls & Logging Panel -->
+          <div class="tracker-controls-card">
+            <div class="target-setting-row">
+              <label for="goalSelector"><strong>Daily Hydration Goal:</strong></label>
+              <select id="goalSelector" class="form-select">
+                <option value="2000">2000 ml (8 standard cups - moderate activity)</option>
+                <option value="2500" selected>2500 ml (10 cups - recommended student average)</option>
+                <option value="3000">3000 ml (12 cups - active / sports / hot weather)</option>
+                <option value="3500">3500 ml (14 cups - high physical demand)</option>
+              </select>
+            </div>
+
+            <div class="quick-add-section">
+              <label class="section-sublabel">Quick Add Portions:</label>
+              <div class="quick-btns-grid">
+                <button class="quick-btn" data-amount="200" title="Small Chai/Water Glass">
+                  <span class="btn-emoji">🥛</span>
+                  <span class="btn-vol">+200 ml</span>
+                  <span class="btn-name">Small Glass</span>
+                </button>
+                <button class="quick-btn" data-amount="250" title="Standard Cup">
+                  <span class="btn-emoji">🥤</span>
+                  <span class="btn-vol">+250 ml</span>
+                  <span class="btn-name">Standard Cup</span>
+                </button>
+                <button class="quick-btn" data-amount="500" title="Full Water Bottle">
+                  <span class="btn-emoji">🍼</span>
+                  <span class="btn-vol">+500 ml</span>
+                  <span class="btn-name">Campus Bottle</span>
+                </button>
+                <button class="quick-btn" data-amount="150" title="Warm Water or Tea">
+                  <span class="btn-emoji">🍵</span>
+                  <span class="btn-vol">+150 ml</span>
+                  <span class="btn-name">Warm / Herbal</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Custom Add Input -->
+            <div class="custom-add-row">
+              <div class="input-with-affix">
+                <input type="number" id="customAmountInput" placeholder="Custom ml (e.g. 350)" min="50" max="1500" step="50">
+                <span class="affix">ml</span>
+              </div>
+              <button class="btn btn-secondary" id="customAddBtn">Add Custom</button>
+            </div>
+
+            <!-- Action buttons: Undo and Reset -->
+            <div class="tracker-actions-row">
+              <button class="btn btn-sm btn-outline" id="undoWaterBtn">
+                ↩️ Undo Last
+              </button>
+              <button class="btn btn-sm btn-danger-outline" id="resetWaterBtn">
+                🔄 Reset Today's Log
+              </button>
+            </div>
+
+            <!-- Hydration Tips Card -->
+            <div class="hydration-benefit-box">
+              <h4>🧠 Student Hydration Tip</h4>
+              <p>
+                Drinking a glass of water immediately after waking up and 30 minutes before exams boosts alertness, reduces drowsiness in morning lectures, and replenishes overnight fluid loss!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Logs Table -->
+        <div class="tracker-history-card">
+          <div class="history-header">
+            <h3>Today's Consumption History</h3>
+            <span class="history-count" id="logCountText">0 entries today</span>
+          </div>
+          <div class="log-list" id="logListContainer">
+            <div class="empty-log-msg">No water intake logged yet today. Click one of the portion buttons above to add your first glass!</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- TAB 5: HEALTHY HABITS -->
+    <section class="page-tab" id="tab-habits">
+      <div class="container section-padding">
+        <div class="section-header">
+          <span class="section-tag">Campus Wellness Guide</span>
+          <h2 class="section-title">Healthy Habits for Undergraduate Life</h2>
+          <p class="section-subtitle">
+            Practical, evidence-backed lifestyle routines designed for computer science engineering students navigating code deadlines and project sprints.
+          </p>
+        </div>
+
+        <div class="habits-grid">
+          <!-- Habit 1: Screen Fatigue & 20-20-20 -->
+          <div class="habit-card">
+            <div class="habit-icon">💻</div>
+            <div class="habit-content">
+              <h3>The 20-20-20 Screen Relief Rule</h3>
+              <p>Long programming and lab sessions cause dry eyes, blurred vision, and tension headaches.</p>
+              <div class="habit-step">
+                <strong>How to practice:</strong> Every <strong>20 minutes</strong>, look away from your monitor at an object at least <strong>20 feet</strong> away for at least <strong>20 seconds</strong>. Blink deliberately 10 times to naturally re-lubricate your cornea.
+              </div>
+            </div>
+          </div>
+
+          <!-- Habit 2: Exam Brain Food -->
+          <div class="habit-card">
+            <div class="habit-icon">🧠</div>
+            <div class="habit-content">
+              <h3>Smart Exam Nutrition &amp; Memory Fuel</h3>
+              <p>Heavy oily meals before tests divert blood flow to digestion, causing lethargy and slow memory recall.</p>
+              <div class="habit-step">
+                <strong>What to eat:</strong> 90 minutes before an exam, eat a light balanced meal—such as curd with banana, a vegetable sandwich, or boiled eggs with whole wheat bread. Carry a bottle of water into the hall.
+              </div>
+            </div>
+          </div>
+
+          <!-- Habit 3: Late Night Study Snacking -->
+          <div class="habit-card">
+            <div class="habit-icon">🌙</div>
+            <div class="habit-content">
+              <h3>Healthy Late-Night Study Snacks</h3>
+              <p>Late night cravings often lead to instant noodles or sugar-heavy biscuits that disturb restorative sleep cycles.</p>
+              <div class="habit-step">
+                <strong>Better alternatives:</strong> Keep roasted makhana (foxnuts), roasted peanuts, a warm cup of milk/soymilk, or a fresh apple with peanut butter. These stabilize glucose and promote restful sleep.
+              </div>
+            </div>
+          </div>
+
+          <!-- Habit 4: Sleep Hygiene -->
+          <div class="habit-card">
+            <div class="habit-icon">😴</div>
+            <div class="habit-content">
+              <h3>Circadian Sleep Rhythm in Hostels</h3>
+              <p>Irregular all-nighters damage memory consolidation where newly learned code patterns are stored into long-term memory.</p>
+              <div class="habit-step">
+                <strong>Actionable routine:</strong> Aim for 7–8 hours of consistent sleep. Stop caffeine intake 6 hours prior to bedtime. Enable blue-light filter ("Night Light") on your laptop after 9:00 PM.
+              </div>
+            </div>
+          </div>
+
+          <!-- Habit 5: Lab Stretches -->
+          <div class="habit-card">
+            <div class="habit-icon">🧘</div>
+            <div class="habit-content">
+              <h3>Ergonomic Desk &amp; Neck Stretches</h3>
+              <p>Hunching over laptops strains cervical vertebrae and lumbar muscles ("tech neck").</p>
+              <div class="habit-step">
+                <strong>3-minute routine:</strong> Roll your shoulders backward 10 times. Gently tilt your ear towards each shoulder for 15 seconds. Stand up and do 10 gentle torso twists during 5-minute lecture breaks.
+              </div>
+            </div>
+          </div>
+
+          <!-- Habit 6: Mindful Eating vs Distracted Grazing -->
+          <div class="habit-card">
+            <div class="habit-icon">🥗</div>
+            <div class="habit-content">
+              <h3>Mindful Eating Without Screen Distraction</h3>
+              <p>Eating while scrolling social media or debugging code prevents satiety hormone signaling, leading to overeating.</p>
+              <div class="habit-step">
+                <strong>Try this:</strong> Dedicate 15 dedicated minutes to eating your meal without YouTube or coding. Chew slowly; notice flavors and fullness cues. You will feel energized rather than bloated.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Weekly Habit Checklist -->
+        <div class="weekly-checklist-card">
+          <div class="checklist-header">
+            <h3>✅ Student Daily Wellness Checklist</h3>
+            <p>Check off these micro-habits throughout your day on campus:</p>
+          </div>
+          <div class="checklist-items" id="habitChecklist">
+            <label class="check-item">
+              <input type="checkbox" id="chk1">
+              <span>Drank at least 1 glass of water right after waking up.</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" id="chk2">
+              <span>Included at least one protein source in breakfast or lunch (dal, egg, curd, sprouts).</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" id="chk3">
+              <span>Took a 5-minute movement break during long screen sessions.</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" id="chk4">
+              <span>Chose a wholesome snack (fruit, peanuts, corn) over ultra-processed fried items.</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" id="chk5">
+              <span>Met my 2.5L daily hydration target.</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- TAB 6: NUTRITION QUIZ -->
+    <section class="page-tab" id="tab-quiz">
+      <div class="container section-padding">
+        <div class="section-header">
+          <span class="section-tag">Interactive Knowledge Check</span>
+          <h2 class="section-title">College Nutrition &amp; Wellness Quiz</h2>
+          <p class="section-subtitle">
+            Bust common myths about college diets, energy drinks, and healthy living. Receive instant feedback and explanations after each answer!
+          </p>
+        </div>
+
+        <div class="quiz-container-card">
+          <!-- Quiz Progress Header -->
+          <div class="quiz-top-bar">
+            <div class="quiz-step-info">
+              Question <span id="currentQNum">1</span> of <span id="totalQNum">7</span>
+            </div>
+            <div class="quiz-progress-track">
+              <div class="quiz-progress-bar" id="quizProgressBar" style="width: 14%;"></div>
+            </div>
+            <div class="quiz-score-pill">
+              Score: <span id="liveScore">0</span>
+            </div>
+          </div>
+
+          <!-- Active Question Area -->
+          <div class="quiz-body" id="quizQuestionArea">
+            <h3 class="quiz-question-title" id="questionTitle">Loading question...</h3>
+            
+            <div class="quiz-options-list" id="optionsContainer">
+              <!-- Dynamically populated -->
+            </div>
+
+            <!-- Feedback Explanation Box (Appears after answer) -->
+            <div class="quiz-feedback-box hidden" id="quizFeedbackBox">
+              <div class="feedback-badge" id="feedbackBadge">Correct!</div>
+              <p class="feedback-explanation" id="feedbackExplanationText"></p>
+              <button class="btn btn-primary" id="nextQuestionBtn">Next Question &rarr;</button>
+            </div>
+          </div>
+
+          <!-- Quiz Completion Scoreboard (Initially Hidden) -->
+          <div class="quiz-results hidden" id="quizResultsArea">
+            <div class="trophy-icon">🏆</div>
+            <h3 class="result-title">Quiz Completed!</h3>
+            <div class="final-score-display">
+              You scored <span id="finalScoreVal">0</span> out of <span id="finalTotalVal">7</span>
+            </div>
+            <div class="achievement-badge" id="achievementBadge">
+              Campus Wellness Champion
+            </div>
+            <p class="result-summary" id="resultSummaryText">
+              Great effort! You possess a solid grasp of foundational nutrition and healthy student habits.
+            </p>
+            <div class="quiz-action-btns">
+              <button class="btn btn-primary" id="restartQuizBtn">🔄 Retake Quiz</button>
+              <a href="#nutrition" class="btn btn-outline" data-tab="nutrition">Review Nutrition Guide</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- TAB 7: USABILITY FEEDBACK -->
+    <section class="page-tab" id="tab-feedback">
+      <div class="container section-padding">
+        <div class="section-header">
+          <span class="section-tag">Objective 5 &amp; Methodology</span>
+          <h2 class="section-title">Usability &amp; Community Evaluation</h2>
+          <p class="section-subtitle">
+            As outlined in our Course 25CPD37 methodology, we gather direct usability feedback from student testers to assess content clarity, ease of navigation, and educational value.
+          </p>
+        </div>
+
+        <div class="feedback-grid">
+          <!-- Form Card -->
+          <div class="feedback-form-card">
+            <h3>Student Tester Feedback Form</h3>
+            <p class="form-instructions">Please share your honest experience testing the NutriCampus web application:</p>
+
+            <form id="feedbackForm" class="academic-feedback-form">
+              <div class="form-group">
+                <label for="testerName">Your Name / USN (Optional):</label>
+                <input type="text" id="testerName" class="form-input" placeholder="e.g. Rahul S. / 1NH25CS000">
+              </div>
+
+              <div class="form-group">
+                <label for="testerBranch">Department &amp; Semester:</label>
+                <input type="text" id="testerBranch" class="form-input" placeholder="e.g. CSE - 3rd Sem" value="CSE - 3rd Sem">
+              </div>
+
+              <!-- Rating 1: Navigation -->
+              <div class="rating-group">
+                <label>1. Ease of Navigation &amp; Responsiveness:</label>
+                <div class="star-rating" data-name="navRating">
+                  <span class="star" data-val="1">★</span>
+                  <span class="star" data-val="2">★</span>
+                  <span class="star" data-val="3">★</span>
+                  <span class="star" data-val="4">★</span>
+                  <span class="star active" data-val="5">★</span>
+                  <input type="hidden" id="navRating" value="5">
+                </div>
+              </div>
+
+              <!-- Rating 2: Clarity of Nutrition Content -->
+              <div class="rating-group">
+                <label>2. Clarity &amp; Reliability of Nutrition Information:</label>
+                <div class="star-rating" data-name="contentRating">
+                  <span class="star" data-val="1">★</span>
+                  <span class="star" data-val="2">★</span>
+                  <span class="star" data-val="3">★</span>
+                  <span class="star" data-val="4">★</span>
+                  <span class="star active" data-val="5">★</span>
+                  <input type="hidden" id="contentRating" value="5">
+                </div>
+              </div>
+
+              <!-- Rating 3: Interactive Tools (BMI, Water Tracker, Quiz) -->
+              <div class="rating-group">
+                <label>3. Usefulness of Interactive Tools (BMI, Water Tracker, Quiz):</label>
+                <div class="star-rating" data-name="toolsRating">
+                  <span class="star" data-val="1">★</span>
+                  <span class="star" data-val="2">★</span>
+                  <span class="star" data-val="3">★</span>
+                  <span class="star" data-val="4">★</span>
+                  <span class="star active" data-val="5">★</span>
+                  <input type="hidden" id="toolsRating" value="5">
+                </div>
+              </div>
+
+              <!-- Question: Did it improve awareness? -->
+              <div class="form-group">
+                <label>4. Did this application help improve your awareness of daily nutrition?</label>
+                <div class="radio-options">
+                  <label class="radio-label">
+                    <input type="radio" name="awarenessGain" value="Yes, significantly" checked>
+                    <span>Yes, significantly</span>
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="awarenessGain" value="Somewhat">
+                    <span>Somewhat</span>
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="awarenessGain" value="Neutral">
+                    <span>Neutral</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Suggestions -->
+              <div class="form-group">
+                <label for="testerComments">5. Suggestions, feature ideas, or feedback for the team:</label>
+                <textarea id="testerComments" rows="3" class="form-input" placeholder="e.g. The water tracker animation was smooth; adding more hostel mess food swaps would be great!"></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block" id="submitFeedbackBtn">
+                Submit Usability Feedback
+              </button>
+            </form>
+
+            <div class="feedback-success-msg hidden" id="feedbackSuccess">
+              <div class="success-icon">🎉</div>
+              <h4>Thank you for your valuable feedback!</h4>
+              <p>Your response has been recorded. It contributes directly to our Phase 6 usability study documentation for 25CPD37.</p>
+            </div>
+          </div>
+
+          <!-- Evaluation Summary & Tester Log Box -->
+          <div class="feedback-stats-card">
+            <h3>Tester Evaluation Metrics</h3>
+            <p>Live summary compiled from participating student reviewers:</p>
+
+            <div class="stat-metrics-grid">
+              <div class="metric-box">
+                <span class="metric-num" id="totalReviewsCount">12</span>
+                <span class="metric-lbl">Total Testers</span>
+              </div>
+              <div class="metric-box">
+                <span class="metric-num" id="avgNavRating">4.9 / 5</span>
+                <span class="metric-lbl">Avg Navigation</span>
+              </div>
+              <div class="metric-box">
+                <span class="metric-num" id="avgContentRating">4.8 / 5</span>
+                <span class="metric-lbl">Avg Content Clarity</span>
+              </div>
+              <div class="metric-box">
+                <span class="metric-num" id="avgToolsRating">5.0 / 5</span>
+                <span class="metric-lbl">Avg Tool Utility</span>
+              </div>
+            </div>
+
+            <!-- Recent Reviews Feed -->
+            <div class="recent-reviews-section">
+              <h4>Recent Student Reviews:</h4>
+              <div class="reviews-feed" id="reviewsFeed">
+                <!-- Dynamically populated or seeded with realistic pilot testing entries -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-left">
+        <div class="footer-brand">NutriCampus NHCE</div>
+        <p>Department of Computer Science and Engineering, New Horizon College of Engineering, Bengaluru.</p>
+        <p class="disclaimer-note">
+          ⚠️ <strong>Medical Disclaimer:</strong> For informational and general awareness purposes only. Not intended to diagnose, treat, or replace professional medical consultations.
+        </p>
+      </div>
+      <div class="footer-right">
+        <div class="footer-links">
+          <a href="#home" data-tab="home">Home</a>
+          <a href="#nutrition" data-tab="nutrition">Nutrition</a>
+          <a href="#bmi" data-tab="bmi">BMI</a>
+          <a href="#tracker" data-tab="tracker">Water</a>
+          <a href="#quiz" data-tab="quiz">Quiz</a>
+          <a href="#feedback" data-tab="feedback">Usability</a>
+        </div>
+        <p class="copyright">&copy; 2026 NHCE CSE • Course 25CPD37 • Community Project using Innovation &amp; Design Thinking.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
