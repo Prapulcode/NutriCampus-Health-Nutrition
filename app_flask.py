@@ -13,7 +13,9 @@ import sqlite3
 import os
 
 app = Flask(__name__, static_folder=".", static_url_path="")
-DB_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "health_nutrition.db")
+
+# On Vercel serverless environment, the root filesystem is read-only; use /tmp for SQLite
+DB_FILE = "/tmp/health_nutrition.db" if os.environ.get("VERCEL") else os.path.join(os.path.dirname(os.path.abspath(__file__)), "health_nutrition.db")
 
 
 def get_db():
@@ -93,7 +95,12 @@ def post_feedback():
     return jsonify({"success": True, "id": new_id, "message": "Feedback recorded."}), 201
 
 
-if __name__ == "__main__":
+# Auto-initialize database on startup / serverless cold-start
+try:
     init_db()
+except Exception as e:
+    print(f"DB init warning: {e}")
+
+if __name__ == "__main__":
     print("Starting NutriCampus Flask Server at http://localhost:5000 ...")
     app.run(host="0.0.0.0", port=5000, debug=True)
