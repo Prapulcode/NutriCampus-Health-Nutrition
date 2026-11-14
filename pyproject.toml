@@ -1,2 +1,2 @@
 [tool.vercel]
-entrypoint = "app_flask:app"
+entrypoint = "app:app"

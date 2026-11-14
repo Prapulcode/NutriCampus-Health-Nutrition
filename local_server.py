@@ -16,12 +16,6 @@ import os
 import sys
 from urllib.parse import urlparse
 
-# Export Flask app instance for Vercel deployment compatibility
-try:
-    from app_flask import app
-except Exception:
-    app = None
-
 PORT = 5000
 DB_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "health_nutrition.db")
 STATIC_DIR = os.path.dirname(os.path.abspath(__file__))
