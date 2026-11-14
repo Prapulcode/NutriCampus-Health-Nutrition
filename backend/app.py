@@ -10,7 +10,8 @@ from flask import Flask, render_template, request, jsonify, send_from_directory
 import sqlite3
 import os
 
-app = Flask(__name__, static_folder=".", static_url_path="")
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+app = Flask(__name__, static_folder=ROOT_DIR, static_url_path="")
 
 # On Vercel serverless environment, the root filesystem is read-only; use /tmp for SQLite
 DB_FILE = "/tmp/health_nutrition.db" if os.environ.get("VERCEL") else os.path.join(os.path.dirname(os.path.abspath(__file__)), "health_nutrition.db")
@@ -51,14 +52,15 @@ def init_db():
 
 @app.route("/")
 def index():
-    return send_from_directory(".", "index.html")
+    return send_from_directory(ROOT_DIR, "index.html")
 
 
 @app.route("/<path:path>")
 def static_files(path):
-    if os.path.exists(path):
-        return send_from_directory(".", path)
-    return send_from_directory(".", "index.html")
+    target = os.path.join(ROOT_DIR, path)
+    if os.path.exists(target):
+        return send_from_directory(ROOT_DIR, path)
+    return send_from_directory(ROOT_DIR, "index.html")
 
 
 @app.route("/api/feedback", methods=["GET"])
