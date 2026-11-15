@@ -7,6 +7,12 @@
 
 ---
 
+## 🌐 Live Demo
+
+**Open the website:** [https://nutri-campus-health-nutrition.vercel.app](https://nutri-campus-health-nutrition.vercel.app)
+
+---
+
 ## 🌟 Overview & Objectives
 
 NutriCampus is a student-centered health and nutrition awareness web application built to address the irregular meal habits, screen fatigue, and hydration gaps common among engineering and undergraduate students.
