@@ -32,7 +32,7 @@ Simply double-click `index.html` or right-click and open with **Google Chrome**,
 Run the built-in zero-dependency server:
 ```bash
 cd C:\Users\hi\.gemini\antigravity\scratch\health-nutrition-app
-python server.py
+python backend/local_server.py
 ```
 Open your browser to: **`http://localhost:5000`**  
 - Automatically sets up a local SQLite database (`health_nutrition.db`)
@@ -43,7 +43,7 @@ If your evaluators ask for Flask specifically:
 ```bash
 cd C:\Users\hi\.gemini\antigravity\scratch\health-nutrition-app
 pip install -r requirements.txt
-python app_flask.py
+python app.py
 ```
 Open **`http://localhost:5000`**.
 
@@ -56,8 +56,9 @@ health-nutrition-app/
 ├── index.html          # Main responsive single-page application
 ├── styles.css          # Modern CSS3 with dark/light themes, animations & print stylesheet
 ├── app.js              # Application logic (BMI, Water tracker, Quiz, Feedback, Storage)
-├── server.py           # Standard Python HTTP + SQLite REST API server (Zero dependency)
-├── app_flask.py        # Alternative Python Flask server
+├── public/             # index.html, app.js, styles.css (static front end)
+├── backend/local_server.py  # Standard Python HTTP + SQLite REST API server (Zero dependency)
+├── app.py              # Flask server + API (also the Vercel entrypoint)
 ├── requirements.txt    # Optional Flask dependencies
 ├── SYNOPSIS.md         # Formatted Markdown project synopsis
 └── README.md           # Documentation and guide

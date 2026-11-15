@@ -18,7 +18,7 @@ from urllib.parse import urlparse
 
 PORT = 5000
 DB_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "health_nutrition.db")
-STATIC_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "public")
 
 
 def init_database():
