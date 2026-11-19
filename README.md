@@ -37,7 +37,7 @@ Simply double-click `index.html` or right-click and open with **Google Chrome**,
 ### Method 2: Python Standard Library Server (Recommended for Demos)
 Run the built-in zero-dependency server:
 ```bash
-cd C:\Users\hi\.gemini\antigravity\scratch\health-nutrition-app
+cd C:\Users\hi\.gemini\antigravity\scratch\NutriCampus-Health-Nutrition
 python backend/local_server.py
 ```
 Open your browser to: **`http://localhost:5000`**  
@@ -47,7 +47,7 @@ Open your browser to: **`http://localhost:5000`**
 ### Method 3: Flask Backend (Optional)
 If your evaluators ask for Flask specifically:
 ```bash
-cd C:\Users\hi\.gemini\antigravity\scratch\health-nutrition-app
+cd C:\Users\hi\.gemini\antigravity\scratch\NutriCampus-Health-Nutrition
 pip install -r requirements.txt
 python app.py
 ```
@@ -55,19 +55,36 @@ Open **`http://localhost:5000`**.
 
 ---
 
+## 📊 Presentation Deck (15 Slides)
+
+A comprehensive 15-slide presentation covering all modules is available in two formats:
+1. **PowerPoint Presentation (`.pptx`)**: [NutriCampus_Project_Presentation.pptx](NutriCampus_Project_Presentation.pptx) — Open directly in Microsoft PowerPoint, Google Slides, or Keynote.
+2. **Interactive Web Presentation**: [presentation.html](presentation.html) — Present full-screen in any browser (navigate with arrow keys or Spacebar, click Fullscreen, or print to PDF).
+3. **Regenerate Slides Anytime**:
+   ```bash
+   python generate_ppt.py
+   ```
+
+---
+
 ## 📁 Project Structure
 
 ```
-health-nutrition-app/
-├── index.html          # Main responsive single-page application
-├── styles.css          # Modern CSS3 with dark/light themes, animations & print stylesheet
-├── app.js              # Application logic (BMI, Water tracker, Quiz, Feedback, Storage)
-├── public/             # index.html, app.js, styles.css (static front end)
-├── backend/local_server.py  # Standard Python HTTP + SQLite REST API server (Zero dependency)
-├── app.py              # Flask server + API (also the Vercel entrypoint)
-├── requirements.txt    # Optional Flask dependencies
-├── SYNOPSIS.md         # Formatted Markdown project synopsis
-└── README.md           # Documentation and guide
+NutriCampus-Health-Nutrition/
+├── public/                               # Frontend assets served to browser
+│   ├── index.html                        # Main responsive single-page web app
+│   ├── styles.css                        # Modern CSS3 with dark/light themes
+│   ├── app.js                            # Application logic (BMI, Water, Quiz, Feedback)
+│   └── presentation.html                 # 15-slide interactive web presentation
+├── backend/                              # Backend services for local viva demos
+│   └── local_server.py                   # Zero-dependency Python HTTP + SQLite server
+├── app.py                                # Flask server & Vercel cloud entrypoint
+├── NutriCampus_Project_Presentation.pptx  # 15-slide PowerPoint presentation file
+├── generate_ppt.py                       # Python script to generate/update the presentation
+├── presentation.html                     # Root copy of interactive presentation
+├── requirements.txt                      # Flask & python-pptx dependencies
+├── SYNOPSIS.md                           # Formatted Markdown project synopsis
+└── README.md                             # Documentation and guide
 ```
 
 ---
