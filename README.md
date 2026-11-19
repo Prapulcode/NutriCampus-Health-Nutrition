@@ -83,6 +83,7 @@ NutriCampus-Health-Nutrition/
 ├── generate_ppt.py                       # Python script to generate/update the presentation
 ├── presentation.html                     # Root copy of interactive presentation
 ├── requirements.txt                      # Flask & python-pptx dependencies
+├── SRS.md                                # Comprehensive IEEE Std 830-1998 compliant SRS
 ├── SYNOPSIS.md                           # Formatted Markdown project synopsis
 └── README.md                             # Documentation and guide
 ```
