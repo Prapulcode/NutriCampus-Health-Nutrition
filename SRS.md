@@ -267,19 +267,23 @@ User guidance is seamlessly integrated into the application interface:
   > *"Notice: BMI is an anthropometric population screening ratio, not a medical diagnosis. It does not directly differentiate between bone density, fluid retention, or lean skeletal muscle mass."*
 
 ### 3.4 FR-4: Daily Hydration Tracker & Animated Bottle UI
-- **Description:** The system shall track daily fluid consumption, dynamically animate a visual water bottle graphic, notify users of milestone progress, and persist consumption logs.
+- **Description:** The system shall track daily fluid consumption, dynamically animate a visual water bottle graphic, notify users of milestone progress, enforce a strict daily safety upper limit of 5.0 Liters (5000 mL), and persist consumption logs.
 - **Inputs:**
-  - Daily Goal Configuration: Numeric target selection ($1500 \le \text{goal} \le 4000\text{ mL}$, default: $2000\text{ mL}$).
-  - Incremental Add Triggers: Interactive buttons (`+250 mL Cup`, `+500 mL Bottle`, `+150 mL Glass`).
+  - Daily Goal Configuration: Numeric target selection ($1500 \le \text{goal} \le 5000\text{ mL}$, default: $2500\text{ mL}$).
+  - Incremental Add Triggers: Interactive buttons (`+200 mL Glass`, `+250 mL Cup`, `+500 mL Bottle`, `+150 mL Warm/Tea`).
+  - Custom Volume Input: Bounded between $50\text{ mL}$ and $5000\text{ mL}$.
   - Reset Trigger: `Reset Daily Log` button.
 - **Processing:**
   1. Computes total intake: $\text{CurrentIntake} = \sum \text{logged amounts}$.
-  2. Calculates completion percentage:
+  2. Enforces maximum daily safety limit:
+     $$\text{CurrentIntake} \le \text{MAX\_LIMIT} = 5000\text{ mL } (5.0\text{ L})$$
+     If user attempts to log fluid beyond 5000 mL, the system caps the entry at 5000 mL, disables addition triggers, and renders a safety warning advising against excessive fluid consumption (hyponatremia prevention).
+  3. Calculates completion percentage relative to chosen goal:
      $$P = \min\left(\left(\frac{\text{CurrentIntake}}{\text{DailyGoal}}\right) \times 100, 100\right)\%$$
-  3. Updates CSS wave transformation: `height: P%` and dynamic SVG wave oscillation.
-  4. Appends a timestamped log entry: `{"amount": X, "time": "HH:MM:SS"}`.
-  5. Serializes state into browser `localStorage` under key `nutricampus_water_log`.
-- **Outputs:** Fluid wave animation, numerical percentage counter, remaining volume to goal, and reverse-chronological list of daily intake entries.
+  4. Updates CSS wave transformation: `height: P%` and dynamic SVG wave oscillation.
+  5. Appends a timestamped log entry: `{"amount": X, "time": "HH:MM:SS"}`.
+  6. Serializes state into browser `localStorage` under key `nutricampus_water_log`.
+- **Outputs:** Fluid wave animation, numerical percentage counter, remaining volume to goal, safety limit notice (`5.0 L Max`), and reverse-chronological list of daily intake entries.
 
 ```mermaid
 sequenceDiagram
@@ -330,20 +334,17 @@ sequenceDiagram
 - **Outputs:** Real-time visual feedback, educational explanations, final score report, and badge card with a `Retake Quiz` button.
 
 ### 3.7 FR-7: Usability Testing & Community Feedback Portal (Phase 6 Methodology)
-- **Description:** Fulfilling Objective 5 and Methodology Step 6 of Course 25CPD37, the system shall provide an integrated survey portal to collect and aggregate peer feedback during project demonstrations.
+- **Description:** Fulfilling Objective 5 and Methodology Step 6 of Course 25CPD37, the system shall provide an integrated survey portal to collect and aggregate qualitative peer feedback and awareness gain metrics during project demonstrations (without star ratings).
 - **Inputs:**
   - `student_name`: String (Optional, Name or USN).
   - `branch_sem`: Dropdown / String (e.g., "CSE - 3rd Sem", "ISE", "AIML").
-  - `rating_nav`: Integer (1 to 5 stars, Ease of Navigation).
-  - `rating_content`: Integer (1 to 5 stars, Clarity & Reliability of Nutrition Information).
-  - `rating_tools`: Integer (1 to 5 stars, Utility of Interactive Tools: BMI, Hydration, Quiz).
   - `awareness_gain`: String Radio (`Yes, significantly` | `Somewhat` | `Neutral`).
-  - `comments`: Text string (Qualitative feedback and feature requests).
+  - `comments`: Text string (Qualitative feedback, practical usability observations, and feature requests).
 - **Processing:**
-  1. Validates required fields (`branch_sem`, ratings, `awareness_gain`).
-  2. Computes live aggregate averages across all submitted peer reviews.
+  1. Validates required fields (`branch_sem`, `awareness_gain`).
+  2. Computes aggregate awareness impact percentages across all submitted peer reviews.
   3. Commits review to browser `localStorage` and asynchronously issues an HTTP `POST` request to `/api/feedback`.
-- **Outputs:** Instant submission confirmation message, dynamic update of live rating summary counters, and real-time review list rendering.
+- **Outputs:** Instant submission confirmation message, dynamic update of live review statistics (Total Testers, Awareness Impact %, Pilot Cohort, Positive Reception %), and real-time review list rendering with awareness impact badges.
 
 ### 3.8 FR-8: User Interface Customization & Accessibility Controls
 - **Description:** The system shall provide immediate theme switching between Dark Mode and Light Mode with persistent state retention.

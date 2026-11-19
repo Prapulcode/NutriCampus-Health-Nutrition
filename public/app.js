@@ -337,9 +337,12 @@
     localStorage.setItem(STORAGE_KEYS.WATER_DATA, JSON.stringify(waterState));
   }
 
+  const MAX_WATER_ML = 5000; // Strict daily safety limit of 5.0 Liters / 5000 ml
+
   function updateWaterUI() {
     const target = waterState.target;
-    const consumed = waterState.consumed;
+    const consumed = Math.min(MAX_WATER_ML, waterState.consumed);
+    waterState.consumed = consumed;
     const percent = Math.min(100, Math.round((consumed / target) * 100));
 
     if (targetDisplay) targetDisplay.textContent = target;
@@ -349,9 +352,25 @@
 
     if (goalSelector) goalSelector.value = target.toString();
 
+    // Disable quick-add buttons and custom input when 5L limit reached
+    const isAtLimit = consumed >= MAX_WATER_ML;
+    document.querySelectorAll('.quick-btn').forEach(btn => {
+      btn.disabled = isAtLimit;
+      if (isAtLimit) {
+        btn.classList.add('limit-reached');
+      } else {
+        btn.classList.remove('limit-reached');
+      }
+    });
+
+    if (customAddBtn) customAddBtn.disabled = isAtLimit;
+    if (customAmountInput) customAmountInput.disabled = isAtLimit;
+
     // Contextual status message
     if (statusMessage) {
-      if (consumed === 0) {
+      if (isAtLimit) {
+        statusMessage.innerHTML = '💧 <strong>Daily Maximum Reached (5.0 L / 5000 ml):</strong> You are fully hydrated! Excessive fluid intake beyond 5 L is not recommended.';
+      } else if (consumed === 0) {
         statusMessage.textContent = 'Start hydrating! Take a sip to kick off your day.';
       } else if (percent < 25) {
         statusMessage.textContent = 'Good start! Keep a water bottle handy at your desk.';
@@ -395,14 +414,31 @@
     amount = parseInt(amount, 10);
     if (isNaN(amount) || amount <= 0) return;
 
+    if (waterState.consumed >= MAX_WATER_ML) {
+      showToast('Daily maximum limit of 5.0 L (5000 ml) reached. Excessive water intake is not recommended!', '⚠️');
+      updateWaterUI();
+      return;
+    }
+
     const now = new Date();
     const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-    waterState.consumed += amount;
-    waterState.logs.push({ amount, time: timeStr });
+    let addedAmount = amount;
+    if (waterState.consumed + amount > MAX_WATER_ML) {
+      addedAmount = MAX_WATER_ML - waterState.consumed;
+      waterState.consumed = MAX_WATER_ML;
+      waterState.logs.push({ amount: addedAmount, time: timeStr });
+      saveWaterData();
+      updateWaterUI();
+      showToast(`Logged +${addedAmount} ml (Reached 5.0 L daily maximum limit)`, '💧');
+      return;
+    }
+
+    waterState.consumed += addedAmount;
+    waterState.logs.push({ amount: addedAmount, time: timeStr });
     saveWaterData();
     updateWaterUI();
-    showToast(`Logged +${amount} ml water`, '💧');
+    showToast(`Logged +${addedAmount} ml water`, '💧');
   }
 
   function undoLastWater() {
@@ -682,47 +718,19 @@
   initQuiz();
 
   // ==========================================
-  // 8. USABILITY FEEDBACK SYSTEM
+  // 8. USABILITY FEEDBACK SYSTEM (COMMUNITY EVALUATION)
   // ==========================================
   const feedbackForm = document.getElementById('feedbackForm');
   const feedbackSuccess = document.getElementById('feedbackSuccess');
-  const starContainers = document.querySelectorAll('.star-rating');
   const reviewsFeed = document.getElementById('reviewsFeed');
   const totalReviewsCount = document.getElementById('totalReviewsCount');
-  const avgNavRating = document.getElementById('avgNavRating');
-  const avgContentRating = document.getElementById('avgContentRating');
-  const avgToolsRating = document.getElementById('avgToolsRating');
-
-  // Handle star interactions
-  starContainers.forEach(container => {
-    const stars = container.querySelectorAll('.star');
-    const hiddenInput = container.querySelector('input[type="hidden"]');
-
-    stars.forEach(star => {
-      star.addEventListener('click', () => {
-        const val = parseInt(star.getAttribute('data-val'), 10);
-        if (hiddenInput) hiddenInput.value = val;
-
-        stars.forEach(s => {
-          const sVal = parseInt(s.getAttribute('data-val'), 10);
-          if (sVal <= val) {
-            s.classList.add('active');
-          } else {
-            s.classList.remove('active');
-          }
-        });
-      });
-    });
-  });
+  const awarenessImpactRate = document.getElementById('awarenessImpactRate');
 
   // Seed default tester reviews to showcase realistic testing for 25CPD37 evaluation
   const defaultFeedbackList = [
     {
       name: "Rahul Verma (1NH25CS142)",
       branch: "CSE - 3rd Sem",
-      navRating: 5,
-      contentRating: 5,
-      toolsRating: 5,
       gain: "Yes, significantly",
       comment: "The water bottle animation and campus canteen food swaps are super practical for hostel life!",
       date: "14/11/2026"
@@ -730,9 +738,6 @@
     {
       name: "Sneha Rao (1NH25CS189)",
       branch: "CSE - 3rd Sem",
-      navRating: 5,
-      contentRating: 4,
-      toolsRating: 5,
       gain: "Yes, significantly",
       comment: "Really liked that the BMI tool emphasizes that BMI is only a screening metric and not a medical diagnosis.",
       date: "14/11/2026"
@@ -740,9 +745,6 @@
     {
       name: "Aman Preet (1NH25CS034)",
       branch: "CSE - 3rd Sem",
-      navRating: 4,
-      contentRating: 5,
-      toolsRating: 5,
       gain: "Yes, significantly",
       comment: "The 20-20-20 rule reminder in the habits section is very helpful during long programming lab sessions.",
       date: "13/11/2026"
@@ -772,21 +774,19 @@
     if (!reviewsFeed) return;
     reviewsFeed.innerHTML = '';
 
-    let sumNav = 0;
-    let sumContent = 0;
-    let sumTools = 0;
+    let significantCount = 0;
 
     feedbackList.slice().reverse().forEach(fb => {
-      sumNav += Number(fb.navRating) || 5;
-      sumContent += Number(fb.contentRating) || 5;
-      sumTools += Number(fb.toolsRating) || 5;
+      if (fb.gain === 'Yes, significantly' || !fb.gain) {
+        significantCount++;
+      }
 
       const card = document.createElement('div');
       card.className = 'review-card';
       card.innerHTML = `
         <div class="review-meta">
           <span class="review-author">${escapeHtml(fb.name || 'Anonymous Student')} (${escapeHtml(fb.branch || 'CSE')})</span>
-          <span class="review-stars">${'★'.repeat(fb.toolsRating || 5)}</span>
+          <span class="review-tag">✓ ${escapeHtml(fb.gain || 'Yes, significantly')}</span>
         </div>
         <p class="review-comment">"${escapeHtml(fb.comment || 'Helpful health awareness application.')}"</p>
       `;
@@ -795,9 +795,10 @@
 
     const total = feedbackList.length;
     if (totalReviewsCount) totalReviewsCount.textContent = total;
-    if (avgNavRating) avgNavRating.textContent = `${(sumNav / total).toFixed(1)} / 5`;
-    if (avgContentRating) avgContentRating.textContent = `${(sumContent / total).toFixed(1)} / 5`;
-    if (avgToolsRating) avgToolsRating.textContent = `${(sumTools / total).toFixed(1)} / 5`;
+    if (awarenessImpactRate) {
+      const pct = total > 0 ? Math.round((significantCount / total) * 100) : 100;
+      awarenessImpactRate.textContent = `${pct}%`;
+    }
   }
 
   function escapeHtml(text) {
@@ -812,9 +813,6 @@
 
       const nameInput = document.getElementById('testerName').value.trim();
       const branchInput = document.getElementById('testerBranch').value.trim();
-      const navRating = parseInt(document.getElementById('navRating').value, 10) || 5;
-      const contentRating = parseInt(document.getElementById('contentRating').value, 10) || 5;
-      const toolsRating = parseInt(document.getElementById('toolsRating').value, 10) || 5;
       const comments = document.getElementById('testerComments').value.trim();
       
       const gainRadio = document.querySelector('input[name="awarenessGain"]:checked');
@@ -823,9 +821,6 @@
       const newFeedback = {
         name: nameInput || 'Student Tester',
         branch: branchInput || 'CSE - 3rd Sem',
-        navRating,
-        contentRating,
-        toolsRating,
         gain: gainVal,
         comment: comments || 'App is easy to use and provides clear nutrition awareness.',
         date: new Date().toLocaleDateString()

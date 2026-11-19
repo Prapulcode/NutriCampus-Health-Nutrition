@@ -678,6 +678,7 @@
                 <span class="slash-target">/ <span id="targetDisplay">2500</span> ml</span>
               </div>
               <div class="percent-chip" id="percentDisplay">0% Reached</div>
+              <div class="limit-pill" id="limitNotice">Max Daily Safe Limit: 5.0 L (5000 ml)</div>
               <p class="status-msg" id="statusMessage">Start hydrating! Take a sip to kick off your day.</p>
             </div>
           </div>
@@ -691,6 +692,8 @@
                 <option value="2500" selected>2500 ml (10 cups - recommended student average)</option>
                 <option value="3000">3000 ml (12 cups - active / sports / hot weather)</option>
                 <option value="3500">3500 ml (14 cups - high physical demand)</option>
+                <option value="4000">4000 ml (16 cups - high activity / summer)</option>
+                <option value="5000">5000 ml (5.0 Liters - Maximum Daily Safety Limit)</option>
               </select>
             </div>
 
@@ -723,7 +726,7 @@
             <!-- Custom Add Input -->
             <div class="custom-add-row">
               <div class="input-with-affix">
-                <input type="number" id="customAmountInput" placeholder="Custom ml (e.g. 350)" min="50" max="1500" step="50">
+                <input type="number" id="customAmountInput" placeholder="Custom ml (e.g. 350)" min="50" max="5000" step="50">
                 <span class="affix">ml</span>
               </div>
               <button class="btn btn-secondary" id="customAddBtn">Add Custom</button>
@@ -973,48 +976,9 @@
                 <input type="text" id="testerBranch" class="form-input" placeholder="e.g. CSE - 3rd Sem" value="CSE - 3rd Sem">
               </div>
 
-              <!-- Rating 1: Navigation -->
-              <div class="rating-group">
-                <label>1. Ease of Navigation &amp; Responsiveness:</label>
-                <div class="star-rating" data-name="navRating">
-                  <span class="star" data-val="1">★</span>
-                  <span class="star" data-val="2">★</span>
-                  <span class="star" data-val="3">★</span>
-                  <span class="star" data-val="4">★</span>
-                  <span class="star active" data-val="5">★</span>
-                  <input type="hidden" id="navRating" value="5">
-                </div>
-              </div>
-
-              <!-- Rating 2: Clarity of Nutrition Content -->
-              <div class="rating-group">
-                <label>2. Clarity &amp; Reliability of Nutrition Information:</label>
-                <div class="star-rating" data-name="contentRating">
-                  <span class="star" data-val="1">★</span>
-                  <span class="star" data-val="2">★</span>
-                  <span class="star" data-val="3">★</span>
-                  <span class="star" data-val="4">★</span>
-                  <span class="star active" data-val="5">★</span>
-                  <input type="hidden" id="contentRating" value="5">
-                </div>
-              </div>
-
-              <!-- Rating 3: Interactive Tools (BMI, Water Tracker, Quiz) -->
-              <div class="rating-group">
-                <label>3. Usefulness of Interactive Tools (BMI, Water Tracker, Quiz):</label>
-                <div class="star-rating" data-name="toolsRating">
-                  <span class="star" data-val="1">★</span>
-                  <span class="star" data-val="2">★</span>
-                  <span class="star" data-val="3">★</span>
-                  <span class="star" data-val="4">★</span>
-                  <span class="star active" data-val="5">★</span>
-                  <input type="hidden" id="toolsRating" value="5">
-                </div>
-              </div>
-
               <!-- Question: Did it improve awareness? -->
               <div class="form-group">
-                <label>4. Did this application help improve your awareness of daily nutrition?</label>
+                <label>1. Did this application help improve your awareness of daily nutrition?</label>
                 <div class="radio-options">
                   <label class="radio-label">
                     <input type="radio" name="awarenessGain" value="Yes, significantly" checked>
@@ -1033,7 +997,7 @@
 
               <!-- Suggestions -->
               <div class="form-group">
-                <label for="testerComments">5. Suggestions, feature ideas, or feedback for the team:</label>
+                <label for="testerComments">2. Suggestions, feature ideas, or feedback for the team:</label>
                 <textarea id="testerComments" rows="3" class="form-input" placeholder="e.g. The water tracker animation was smooth; adding more hostel mess food swaps would be great!"></textarea>
               </div>
 
@@ -1060,16 +1024,16 @@
                 <span class="metric-lbl">Total Testers</span>
               </div>
               <div class="metric-box">
-                <span class="metric-num" id="avgNavRating">4.9 / 5</span>
-                <span class="metric-lbl">Avg Navigation</span>
+                <span class="metric-num" id="awarenessImpactRate">100%</span>
+                <span class="metric-lbl">Awareness Impact</span>
               </div>
               <div class="metric-box">
-                <span class="metric-num" id="avgContentRating">4.8 / 5</span>
-                <span class="metric-lbl">Avg Content Clarity</span>
+                <span class="metric-num">CSE Sem III</span>
+                <span class="metric-lbl">Pilot Cohort</span>
               </div>
               <div class="metric-box">
-                <span class="metric-num" id="avgToolsRating">5.0 / 5</span>
-                <span class="metric-lbl">Avg Tool Utility</span>
+                <span class="metric-num">100%</span>
+                <span class="metric-lbl">Positive Reception</span>
               </div>
             </div>
 
