@@ -55,15 +55,21 @@ Open **`http://localhost:5000`**.
 
 ---
 
-## 📊 Presentation Deck (15 Slides)
+## 📊 Presentation Decks
 
-A comprehensive 15-slide presentation covering all modules is available in two formats:
-1. **PowerPoint Presentation (`.pptx`)**: [NutriCampus_Project_Presentation.pptx](NutriCampus_Project_Presentation.pptx) — Open directly in Microsoft PowerPoint, Google Slides, or Keynote.
-2. **Interactive Web Presentation**: [presentation.html](presentation.html) — Present full-screen in any browser (navigate with arrow keys or Spacebar, click Fullscreen, or print to PDF).
-3. **Regenerate Slides Anytime**:
-   ```bash
-   python generate_ppt.py
-   ```
+### 1. Compact 5-Slide SRS Presentation Deck (Executive / Viva Format)
+Built strictly following the **Compact 5-Slide SRS Deck Structure** with balanced two-column layouts, clean visual hierarchy, and full presenter speech scripts:
+- **PowerPoint File (`.pptx`)**: [NutriCampus_5Slide_SRS_Deck.pptx](NutriCampus_5Slide_SRS_Deck.pptx) — Includes embedded **Speaker Notes** ("What to Say Out Loud") on every slide.
+- **Interactive Web Deck**: [public/srs_deck.html](public/srs_deck.html) — Navigate with Arrow keys / Spacebar, press **N** to view speaker scripts, and press **F** for Fullscreen.
+- **Regenerate Anytime**:
+  ```bash
+  python generate_5slide_srs_ppt.py
+  ```
+
+### 2. Comprehensive 15-Slide Project Module Deck
+A detailed 15-slide presentation covering all individual modules:
+- **PowerPoint File (`.pptx`)**: [NutriCampus_Project_Presentation_Updated.pptx](NutriCampus_Project_Presentation_Updated.pptx)
+- **Interactive Web Deck**: [public/presentation.html](public/presentation.html)
 
 ---
 
@@ -75,16 +81,16 @@ NutriCampus-Health-Nutrition/
 │   ├── index.html                        # Main responsive single-page web app
 │   ├── styles.css                        # Modern CSS3 with dark/light themes
 │   ├── app.js                            # Application logic (BMI, Water, Quiz, Feedback)
+│   ├── srs_deck.html                     # 5-slide interactive SRS presentation with speaker notes
 │   └── presentation.html                 # 15-slide interactive web presentation
 ├── backend/                              # Backend services for local viva demos
 │   └── local_server.py                   # Zero-dependency Python HTTP + SQLite server
 ├── app.py                                # Flask server & Vercel cloud entrypoint
-├── NutriCampus_Project_Presentation.pptx  # 15-slide PowerPoint presentation file
-├── generate_ppt.py                       # Python script to generate/update the presentation
-├── presentation.html                     # Root copy of interactive presentation
-├── requirements.txt                      # Flask & python-pptx dependencies
+├── NutriCampus_5Slide_SRS_Deck.pptx      # Compact 5-slide SRS PowerPoint deck with speaker notes
+├── generate_5slide_srs_ppt.py            # Python script to generate the 5-slide SRS presentation
+├── NutriCampus_Project_Presentation_Updated.pptx # 15-slide PowerPoint presentation file
+├── requirements.txt                      # Dependencies (Flask, python-pptx)
 ├── SRS.md                                # Comprehensive IEEE Std 830-1998 compliant SRS
-├── SYNOPSIS.md                           # Formatted Markdown project synopsis
 └── README.md                             # Documentation and guide
 ```
 

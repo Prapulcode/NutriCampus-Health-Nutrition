@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NutriCampus - Compact 5-Slide SRS Presentation Deck | NHCE CSE 25CPD37</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #065f46;
+      --primary-dark: #044e39;
+      --primary-light: #d1fae5;
+      --accent-mint: #10b981;
+      --blue: #0284c7;
+      --blue-light: #e0f2fe;
+      --amber: #d97706;
+      --amber-light: #fef3c7;
+      --slate-900: #0f172a;
+      --slate-700: #334155;
+      --slate-500: #64748b;
+      --slate-200: #e2e8f0;
+      --slate-100: #f1f5f9;
+      --white: #ffffff;
+      --radius: 12px;
+      --shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #0b1120;
+      color: var(--slate-900);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    /* Top Control Bar */
+    .controls-bar {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      color: var(--white);
+    }
+    .controls-left { display: flex; align-items: center; gap: 0.75rem; }
+    .badge-deck {
+      background: var(--primary);
+      color: var(--primary-light);
+      padding: 0.3rem 0.8rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .deck-title-mini { font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 700; }
+    .controls-right { display: flex; gap: 0.5rem; align-items: center; }
+    .btn-nav {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--white);
+      padding: 0.45rem 0.9rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .btn-nav:hover { background: rgba(255, 255, 255, 0.25); }
+    .btn-notes-toggle { background: var(--blue); border-color: var(--blue); }
+    .slide-counter {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--accent-mint);
+      margin: 0 0.5rem;
+    }
+
+    /* Slide Stage (16:9 Aspect Ratio) */
+    .slide-stage {
+      width: 100%;
+      max-width: 1200px;
+      aspect-ratio: 16 / 9;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Slide Header */
+    .slide-header {
+      background: var(--primary);
+      padding: 1rem 2rem;
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .slide-cat {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-mint);
+    }
+    .slide-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+
+    /* Slide Content Canvas */
+    .slide-canvas {
+      flex: 1;
+      padding: 1.5rem 2rem;
+      overflow-y: auto;
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .slide-canvas.active { display: flex; }
+
+    /* Two-Column Grid */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      height: 100%;
+    }
+
+    /* Three-Column Grid */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    /* Content Cards */
+    .card {
+      background: var(--white);
+      border: 1.5px solid var(--slate-200);
+      border-radius: 10px;
+      padding: 1.25rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .card-primary { border-color: var(--primary); }
+    .card-blue { border-color: var(--blue); }
+    .card-amber { border-color: var(--amber); }
+
+    .card-heading {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .text-primary { color: var(--primary); }
+    .text-blue { color: var(--blue); }
+    .text-amber { color: var(--amber); }
+
+    .card-subhead {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--slate-900);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-top: 0.25rem;
+    }
+
+    .card-text {
+      font-size: 0.88rem;
+      line-height: 1.45;
+      color: var(--slate-700);
+    }
+    .quote-box {
+      font-style: italic;
+      color: var(--slate-700);
+      background: var(--slate-100);
+      padding: 0.65rem 0.85rem;
+      border-left: 3px solid var(--primary);
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      margin-top: 0.25rem;
+    }
+    .bullet-list li {
+      font-size: 0.85rem;
+      color: var(--slate-700);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+      line-height: 1.35;
+    }
+    .bullet-list li::before {
+      content: "•";
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 1rem;
+    }
+    .card-blue .bullet-list li::before { color: var(--blue); }
+    .card-amber .bullet-list li::before { color: var(--amber); }
+
+    /* Flow block diagram on Slide 3 */
+    .flow-step {
+      background: var(--slate-100);
+      border: 1px solid var(--slate-200);
+      border-radius: 6px;
+      padding: 0.55rem 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+    .flow-step-title { font-size: 0.8rem; font-weight: 700; }
+    .flow-step-desc { font-size: 0.75rem; color: var(--slate-500); }
+
+    /* Slide Footer */
+    .slide-footer {
+      border-top: 1px solid var(--slate-200);
+      padding: 0.6rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--slate-500);
+      background: #fafafa;
+    }
+
+    /* Speaker Notes Drawer */
+    .speaker-notes-panel {
+      width: 100%;
+      max-width: 1200px;
+      background: #1e293b;
+      border-radius: var(--radius);
+      margin-top: 1rem;
+      padding: 1rem 1.5rem;
+      color: #e2e8f0;
+      border: 1px solid #334155;
+      display: none;
+    }
+    .speaker-notes-panel.active { display: block; }
+    .notes-header {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent-mint);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .notes-content {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #cbd5e1;
+    }
+
+    /* Callout Banner */
+    .callout-banner {
+      background: var(--primary);
+      color: var(--white);
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .callout-title { font-family: 'Outfit', sans-serif; font-size: 1.15rem; font-weight: 800; color: var(--accent-mint); margin-bottom: 0.25rem; }
+    .callout-sub { font-size: 0.82rem; color: var(--primary-light); }
+  </style>
+</head>
+<body>
+
+  <!-- Controls Bar -->
+  <div class="controls-bar">
+    <div class="controls-left">
+      <span class="badge-deck">SRS 5-Slide Deck</span>
+      <span class="deck-title-mini">NutriCampus Health Application</span>
+    </div>
+    <div class="controls-right">
+      <button class="btn-nav" id="prevBtn">◀ Prev</button>
+      <span class="slide-counter" id="slideIndicator">1 / 5</span>
+      <button class="btn-nav" id="nextBtn">Next ▶</button>
+      <button class="btn-nav btn-notes-toggle" id="toggleNotesBtn">🎙️ What to Say Out Loud (N)</button>
+      <button class="btn-nav" id="fullscreenBtn">⛶ Fullscreen (F)</button>
+    </div>
+  </div>
+
+  <!-- 16:9 Presentation Stage -->
+  <div class="slide-stage" id="slideStage">
+
+    <!-- SLIDE 1 -->
+    <div class="slide-canvas active" data-index="1">
+      <div class="slide-header">
+        <span class="slide-cat">COMMUNITY PROJECT (25CPD37) • DEPT OF CSE, NHCE</span>
+        <h1 class="slide-title">NutriCampus: Health &amp; Nutrition Web Application</h1>
+      </div>
+      <div class="grid-2" style="margin-top: 1rem;">
+        <div class="card card-primary">
+          <div class="card-heading text-primary">🚨 Real-World Problem Overview</div>
+          <div class="card-subhead">1-Sentence Problem Statement:</div>
+          <div class="quote-box">
+            "Undergraduate students face irregular eating schedules, chronic lab dehydration, and high reliance on nutrient-poor canteen snacks with zero accessible guidance."
+          </div>
+          <div class="card-subhead">Core Pain Points:</div>
+          <ul class="bullet-list">
+            <li>Irregular meal hours during coding labs</li>
+            <li>Heavy canteen fried snacks and sodas</li>
+            <li>Afternoon brain fog and low daily hydration</li>
+            <li>Clinical nutrition tools are complex and intimidating</li>
+          </ul>
+        </div>
+
+        <div class="card card-blue">
+          <div class="card-heading text-blue">🎯 Core System Goal &amp; Value</div>
+          <div class="card-subhead">System Vision:</div>
+          <div class="quote-box">
+            "Deliver a lightweight, zero-barrier responsive web application translating complex nutrition into realistic food swaps, hydration tracking, and screening."
+          </div>
+          <div class="card-subhead">Key Solution Highlights:</div>
+          <ul class="bullet-list">
+            <li>100% Zero-install single page web architecture</li>
+            <li>Intuitive 50-25-25 balanced visual plate guide</li>
+            <li>Safe hydration tracking capped at 5.0 Liters</li>
+            <li>Validated non-diagnostic medical screening boundary</li>
+          </ul>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Course: 25CPD37 – Community Project using Innovation &amp; Design Thinking</span>
+        <span>Slide 1 of 5</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 2 -->
+    <div class="slide-canvas" data-index="2">
+      <div class="slide-header">
+        <span class="slide-cat">SYSTEM BOUNDARIES &amp; STAKEHOLDERS • COURSE 25CPD37</span>
+        <h1 class="slide-title">Slide 2: Scope &amp; Target Users</h1>
+      </div>
+      <div class="grid-2" style="margin-top: 1rem;">
+        <div class="card card-primary">
+          <div class="card-heading text-primary">📌 Project Scope Boundaries</div>
+          <div class="card-subhead">In Scope (Version 1.0 Release):</div>
+          <ul class="bullet-list">
+            <li>50-25-25 visual balanced meal guide</li>
+            <li>Practical Indian canteen food swaps</li>
+            <li>Anthropometric BMI screening calculator</li>
+            <li>Fluid water tracker with 5.0 L safety limit</li>
+            <li>7-question gamified myth-busting quiz</li>
+            <li>Usability survey &amp; community evaluation portal</li>
+          </ul>
+          <div class="card-subhead" style="color: var(--amber); margin-top: 0.5rem;">Out of Scope (Exclusions):</div>
+          <ul class="bullet-list">
+            <li>No clinical medical diagnosis or prescriptions</li>
+            <li>No calorie counting or strict diet regimes</li>
+            <li>No external hardware or wearable sensors</li>
+          </ul>
+        </div>
+
+        <div class="card card-blue">
+          <div class="card-heading text-blue">👥 Target Users &amp; Key Roles</div>
+          <div class="card-subhead">Primary Student Users:</div>
+          <ul class="bullet-list">
+            <li><strong>Hostel &amp; Commuter Students:</strong> Budget food swaps and meal portioning.</li>
+            <li><strong>Engineering Lab Students:</strong> Screen fatigue relief (20-20-20 rule) and hydration.</li>
+          </ul>
+          <div class="card-subhead" style="margin-top: 0.5rem;">Evaluation &amp; Mentorship Roles:</div>
+          <ul class="bullet-list">
+            <li><strong>Peer Reviewers:</strong> 12+ CSE students testing usability and logging reviews.</li>
+            <li><strong>Faculty Evaluators:</strong> Reviewing Design Thinking steps and requirements compliance.</li>
+          </ul>
+          <div class="card-subhead" style="margin-top: 0.5rem;">Operating Environment:</div>
+          <p class="card-text">Any mobile smartphone (Android/iOS) or PC browser (Chrome, Edge, Safari).</p>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Department of Computer Science &amp; Engineering, NHCE</span>
+        <span>Slide 2 of 5</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 -->
+    <div class="slide-canvas" data-index="3">
+      <div class="slide-header">
+        <span class="slide-cat">TECHNICAL ARCHITECTURE &amp; MODULES • COURSE 25CPD37</span>
+        <h1 class="slide-title">Slide 3: Functional Requirements &amp; Architecture</h1>
+      </div>
+      <div class="grid-2" style="margin-top: 1rem;">
+        <div class="card card-blue">
+          <div class="card-heading text-blue">🏗️ Use-Case &amp; System Architecture</div>
+          <div style="display:flex; flex-direction:column; gap:0.45rem;">
+            <div class="flow-step">
+              <span class="flow-step-title text-primary">1. User Interaction (Student / Peer Reviewer)</span>
+              <span class="flow-step-desc">Responsive Web UI: Navigation, Calculators, Tracker, Quiz</span>
+            </div>
+            <div class="flow-step">
+              <span class="flow-step-title text-blue">2. Client-Side Controller (Vanilla JavaScript)</span>
+              <span class="flow-step-desc">Quetelet BMI Engine • 5L Fluid Clamping • Instant Quiz Logic</span>
+            </div>
+            <div class="flow-step">
+              <span class="flow-step-title text-primary">3. Storage &amp; Dual-Tier Persistence</span>
+              <span class="flow-step-desc">• Browser localStorage: Offline hydration logs &amp; state<br>• Python/Flask REST API: Asynchronous feedback sync<br>• SQLite Database (health_nutrition.db): Pilot evaluations</span>
+            </div>
+          </div>
+          <p class="card-text" style="color:var(--primary); font-weight:600; font-size:0.8rem; margin-top:0.3rem;">
+            ✓ Works 100% offline in any browser; seamlessly syncs when connected.
+          </p>
+        </div>
+
+        <div class="card card-primary">
+          <div class="card-heading text-primary">⚡ Top 5 Core Functional Requirements</div>
+          <ul class="bullet-list">
+            <li><strong>FR-1: 50-25-25 Balanced Plate Visualizer:</strong> Interactive portions (50% veggies/fiber, 25% complex carbs, 25% lean protein).</li>
+            <li><strong>FR-2: Campus Canteen &amp; Food Swaps:</strong> Evidence-based swaps for instant noodles, sugary sodas, and fried snacks.</li>
+            <li><strong>FR-3: Anthropometric BMI Screening:</strong> Metric/Imperial calculation with color gauge &amp; mandatory medical disclaimer.</li>
+            <li><strong>FR-4: Hydration Tracker with 5.0 L Limit:</strong> Animated fluid bottle with strict 5000 mL daily safety cap to prevent hyponatremia.</li>
+            <li><strong>FR-5: Quiz &amp; Community Feedback Portal:</strong> Gamified myth-busting badges and rating-free peer usability evaluation.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>NutriCampus Web Application • Architecture &amp; Use-Cases</span>
+        <span>Slide 3 of 5</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 4 -->
+    <div class="slide-canvas" data-index="4">
+      <div class="slide-header">
+        <span class="slide-cat">SYSTEM QUALITY &amp; ETHICAL BOUNDARIES • COURSE 25CPD37</span>
+        <h1 class="slide-title">Slide 4: Non-Functional Requirements &amp; Constraints</h1>
+      </div>
+      <div class="grid-2" style="margin-top: 1rem;">
+        <div class="card card-primary">
+          <div class="card-heading text-primary">🛡️ Quality Standards &amp; Security</div>
+          <div class="card-subhead">Performance Standards:</div>
+          <ul class="bullet-list">
+            <li>Page load under 1.5 seconds on 4G</li>
+            <li>Lightweight bundle under 150 KB total</li>
+            <li>Instant client calculations under 16 ms</li>
+            <li>Zero external CSS/JS framework bloat</li>
+          </ul>
+          <div class="card-subhead" style="color: var(--blue); margin-top: 0.5rem;">Security &amp; Privacy Standards:</div>
+          <ul class="bullet-list">
+            <li>Zero mandatory personal information collection</li>
+            <li>No passwords or user accounts required</li>
+            <li>Parameterized SQL statements prevent injection</li>
+            <li>Strict HTML sanitization blocks XSS attacks</li>
+          </ul>
+        </div>
+
+        <div class="card card-amber">
+          <div class="card-heading text-amber">⚙️ Constraints &amp; Ethical Boundary</div>
+          <div class="card-subhead">Technical Constraints:</div>
+          <ul class="bullet-list">
+            <li>Cross-browser execution (Chrome, Safari, Edge, Firefox)</li>
+            <li>Responsive viewports: 360px mobile to 4K desktop</li>
+            <li>Dual deployment: zero-dependency local server &amp; Vercel edge</li>
+          </ul>
+          <div class="card-subhead" style="color: var(--amber); margin-top: 0.5rem;">Mandatory Medical Ethics Boundary:</div>
+          <ul class="bullet-list">
+            <li>Strictly educational health awareness platform</li>
+            <li>BMI defined as screening ratio, not diagnostic tool</li>
+            <li>Prominent amber disclaimers visible on all screening views</li>
+            <li>Water tracker enforces 5.0 L daily safety limit</li>
+          </ul>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Non-Functional Quality Attributes &amp; Medical Boundaries</span>
+        <span>Slide 4 of 5</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 5 -->
+    <div class="slide-canvas" data-index="5">
+      <div class="slide-header">
+        <span class="slide-cat">PROJECT CONCLUSION • COURSE 25CPD37</span>
+        <h1 class="slide-title">Slide 5: Summary &amp; Key Takeaways</h1>
+      </div>
+      <div class="grid-3" style="margin-top: 1rem;">
+        <div class="card card-primary">
+          <div class="card-heading text-primary">💡 1. Human-Centered</div>
+          <div class="card-subhead">Design Thinking:</div>
+          <p class="card-text">Directly fulfills Course 25CPD37 5-stage framework (Empathize, Define, Ideate, Prototype, Test).</p>
+          <div class="card-subhead" style="margin-top:0.4rem;">Undergraduate Reality:</div>
+          <p class="card-text">Tailored for hostel meal constraints, coding lab eye strain, and irregular hours.</p>
+        </div>
+
+        <div class="card card-blue">
+          <div class="card-heading text-blue">🚀 2. Zero-Barrier Access</div>
+          <div class="card-subhead">Accessible Anywhere:</div>
+          <p class="card-text">No downloads, no logins, no app store hurdles. Works instantly on mobile and desktop.</p>
+          <div class="card-subhead" style="margin-top:0.4rem;">Dual Deployment:</div>
+          <p class="card-text">Zero-dependency local Python/SQLite server + production Vercel cloud deployment.</p>
+        </div>
+
+        <div class="card card-primary">
+          <div class="card-heading text-primary">📈 3. Validated Impact</div>
+          <div class="card-subhead">Peer Review Testing:</div>
+          <p class="card-text">12+ CSE 3rd Sem volunteer student testers completed Phase 6 usability study.</p>
+          <div class="card-subhead" style="margin-top:0.4rem;">Empirical Outcomes:</div>
+          <p class="card-text">100% reported positive awareness adoption; 0 crashes or unhandled client exceptions.</p>
+        </div>
+      </div>
+
+      <div class="callout-banner">
+        <div class="callout-title">❓ THANK YOU! ANY QUESTIONS OR EVALUATOR FEEDBACK?</div>
+        <div class="callout-sub">
+          Live Demo: <strong>https://nutri-campus-health-nutrition.vercel.app</strong> &nbsp;•&nbsp; GitHub: <strong>github.com/Prapulcode/NutriCampus-Health-Nutrition</strong>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Department of Computer Science &amp; Engineering • New Horizon College of Engineering</span>
+        <span>Slide 5 of 5</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Speaker Notes Drawer -->
+  <div class="speaker-notes-panel" id="speakerNotes">
+    <div class="notes-header">🎙️ Presenter Script (What to Say Out Loud for Slide <span id="notesSlideNum">1</span>)</div>
+    <div class="notes-content" id="notesText"></div>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide-canvas');
+    const totalSlides = slides.length;
+    let currentSlide = 1;
+
+    const notes = {
+      1: "Good morning respected evaluators and faculty. We are presenting the Software Requirements Specification for NutriCampus, our community project under Course 25CPD37.\\n\\nUndergraduate students at NHCE routinely encounter irregular eating routines, afternoon fatigue, and heavy canteen snack reliance. Our system provides a zero-barrier, mobile-responsive web tool that translates complex health science into practical food swaps, safe hydration tracking, and non-diagnostic health screening.",
+      2: "In Slide 2, we define who uses our system and draw a clear boundary around v1 capabilities.\\n\\nIn Scope, we implement six core awareness modules: visual meal ratios, canteen swaps, metric BMI screening, a hydration tracker strictly limited to 5 liters, interactive quizzes, and community feedback.\\n\\nOut of Scope, we strictly exclude clinical medical diagnoses, calorie counting, or hardware sensors. Our target users are undergraduate students, hostelites, lab programmers, and our peer evaluation cohort.",
+      3: "Slide 3 presents our system architecture and primary functional requirements.\\n\\nOn the left, the architecture flow shows our dual-tier structure: user interactions run in a pure HTML/JS frontend, persisting data to browser localStorage for offline reliability, with an optional Python SQLite backend for survey aggregation.\\n\\nOn the right are our top 5 functional requirements: the 50-25-25 plate model, canteen swaps, metric BMI screening, a safe hydration tracker capped at 5 liters, and our gamified quiz and community survey.",
+      4: "Slide 4 highlights our Non-Functional Requirements and system constraints.\\n\\nOn performance and security: NutriCampus loads in under 1.5 seconds with an asset footprint under 150 KB. We collect zero sensitive user data, require no passwords, and use parameterized SQL to guarantee security.\\n\\nOn constraints and ethics: The application is cross-browser compliant and works without installation. Most importantly, we maintain a strict medical boundary—prominently displaying disclaimers so users understand that NutriCampus provides educational awareness and screening, not medical diagnoses.",
+      5: "To wrap up our presentation in 20 seconds:\\n1. NutriCampus demonstrates human-centered Design Thinking for undergraduate student wellness.\\n2. It provides zero-barrier accessibility, functioning offline and in the cloud with zero downloads.\\n3. It has been empirically validated through our pilot study with 12 peer evaluators.\\n\\nThank you respected faculty and evaluators. We now open the floor for your questions!"
+    };
+
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const indicator = document.getElementById('slideIndicator');
+    const toggleNotesBtn = document.getElementById('toggleNotesBtn');
+    const speakerNotesPanel = document.getElementById('speakerNotes');
+    const notesSlideNum = document.getElementById('notesSlideNum');
+    const notesText = document.getElementById('notesText');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+    const stage = document.getElementById('slideStage');
+
+    function updateSlide(index) {
+      if (index < 1 || index > totalSlides) return;
+      currentSlide = index;
+      slides.forEach(s => s.classList.remove('active'));
+      const active = document.querySelector(`.slide-canvas[data-index="${index}"]`);
+      if (active) active.classList.add('active');
+      indicator.textContent = `${index} / ${totalSlides}`;
+      notesSlideNum.textContent = index;
+      notesText.innerHTML = notes[index].replace(/\\n/g, '<br>');
+    }
+
+    prevBtn.addEventListener('click', () => updateSlide(currentSlide - 1));
+    nextBtn.addEventListener('click', () => updateSlide(currentSlide + 1));
+
+    toggleNotesBtn.addEventListener('click', () => {
+      speakerNotesPanel.classList.toggle('active');
+    });
+
+    fullscreenBtn.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        stage.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen().catch(() => {});
+      }
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        updateSlide(currentSlide + 1);
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        updateSlide(currentSlide - 1);
+      } else if (e.key.toLowerCase() === 'n') {
+        speakerNotesPanel.classList.toggle('active');
+      } else if (e.key.toLowerCase() === 'f') {
+        fullscreenBtn.click();
+      }
+    });
+
+    // Initialize
+    updateSlide(1);
+  </script>
+</body>
+</html>
