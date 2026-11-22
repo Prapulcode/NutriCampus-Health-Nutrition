@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
 """
-NutriCampus - Executive Dark Professional 5-Slide SRS Presentation Generator
-Style: Dark Executive / Corporate Technology (Deep Slate #0F172A, Refined Cards #1E293B, Precision Borders #334155, Cobalt & Emerald Accents)
+NutriCampus - Executive Dark Professional Presentation Deck
 Course: 25CPD37 - Community Project using Innovation & Design Thinking
 Department of Computer Science & Engineering, New Horizon College of Engineering (NHCE)
+
+Slide 1: Proper Title Cover Page with College, Department, Project Title, and Student/Guide Details.
+Slide 2: Problem Overview & Scope Boundaries.
+Slide 3: System Architecture & Core Functional Requirements.
+Slide 4: Non-Functional Requirements, Security & Medical Ethics.
+Slide 5: Executive Summary, Key Takeaways & Q&A (Completely Clean, Zero URLs).
 """
 
 import os
@@ -13,25 +18,25 @@ from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_ALIGN
 from pptx.enum.shapes import MSO_SHAPE
 
-def create_executive_dark_deck(output_path):
+def build_executive_deck(output_path):
     prs = Presentation()
     prs.slide_width = Inches(13.333)
     prs.slide_height = Inches(7.5)
     blank_layout = prs.slide_layouts[6]
 
-    # Executive Dark Palette (Sophisticated, Enterprise Tech Standard)
+    # Executive Dark Palette (Deep Midnight Slate, Refined Cards, Cobalt & Emerald Accents)
     BG_DARK = RGBColor(15, 23, 42)          # Deep Midnight Slate (#0F172A)
     HEADER_BG = RGBColor(11, 15, 25)        # Slate 950 (#0B0F19)
     CARD_BG = RGBColor(30, 41, 59)          # Refined Slate (#1E293B)
     CARD_BG_SUBTLE = RGBColor(24, 33, 49)   # Slate 850
     CARD_BORDER = RGBColor(51, 65, 85)      # Slate 700 (#334155)
-    CARD_BORDER_ACTIVE = RGBColor(59, 130, 246) # Cobalt Blue (#3B82F6)
+    CARD_BORDER_BLUE = RGBColor(59, 130, 246) # Cobalt Blue (#3B82F6)
     
     PRIMARY_BLUE = RGBColor(59, 130, 246)   # Cobalt Blue (#3B82F6)
     ACCENT_MINT = RGBColor(16, 185, 129)    # Emerald (#10B981)
-    ACCENT_AMBER = RGBColor(245, 158, 11)   # Executive Amber / Gold (#F59E0B)
+    ACCENT_AMBER = RGBColor(245, 158, 11)   # Executive Amber (#F59E0B)
     
-    TEXT_WHITE = RGBColor(255, 255, 255)    # High-contrast Pure White
+    TEXT_WHITE = RGBColor(255, 255, 255)    # High-contrast White
     TEXT_LIGHT = RGBColor(241, 245, 249)    # Slate 100 (#F1F5F9)
     TEXT_BODY = RGBColor(203, 213, 225)     # Slate 300 (#CBD5E1)
     TEXT_MUTED = RGBColor(148, 163, 184)    # Slate 400 (#94A3B8)
@@ -44,14 +49,12 @@ def create_executive_dark_deck(output_path):
         bg.line.fill.background()
         return bg
 
-    def add_header(slide, title, category="SOFTWARE REQUIREMENTS SPECIFICATION • COURSE 25CPD37", slide_num=1):
-        # Header container
+    def add_header(slide, title, category="COMMUNITY PROJECT • COURSE 25CPD37", slide_num=1):
         hdr_panel = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, 0, 0, Inches(13.333), Inches(1.18))
         hdr_panel.fill.solid()
         hdr_panel.fill.fore_color.rgb = HEADER_BG
         hdr_panel.line.fill.background()
 
-        # Hairline divider
         div = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, 0, Inches(1.17), Inches(13.333), Inches(0.015))
         div.fill.solid()
         div.fill.fore_color.rgb = CARD_BORDER
@@ -79,7 +82,7 @@ def create_executive_dark_deck(output_path):
         p_t.font.bold = True
         p_t.font.color.rgb = TEXT_WHITE
 
-        # Slide Number in header corner
+        # Slide Number
         tx_num = slide.shapes.add_textbox(Inches(11.5), Inches(0.40), Inches(1.0), Inches(0.4))
         tf_num = tx_num.text_frame
         tf_num.margin_left = tf_num.margin_right = tf_num.margin_top = tf_num.margin_bottom = 0
@@ -90,7 +93,6 @@ def create_executive_dark_deck(output_path):
         p_num.font.color.rgb = TEXT_MUTED
         p_num.alignment = PP_ALIGN.RIGHT
 
-        # Footer
         add_footer(slide)
 
     def add_footer(slide):
@@ -138,105 +140,141 @@ def create_executive_dark_deck(output_path):
     right_col = Inches(6.86)
 
     # =========================================================================
-    # SLIDE 1: Title & Problem Overview (Executive Dark)
+    # SLIDE 1: PROPER EXECUTIVE COVER / TITLE PAGE
     # =========================================================================
     s1 = prs.slides.add_slide(blank_layout)
     set_slide_background(s1)
 
-    # Top Brand Header Panel
-    hero = s1.shapes.add_shape(MSO_SHAPE.RECTANGLE, 0, 0, Inches(13.333), Inches(1.85))
-    hero.fill.solid()
-    hero.fill.fore_color.rgb = HEADER_BG
-    hero.line.fill.background()
+    # Top Institutional Header Box
+    inst_box = s1.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), Inches(0.45), Inches(11.733), Inches(1.15))
+    inst_box.fill.solid()
+    inst_box.fill.fore_color.rgb = HEADER_BG
+    inst_box.line.color.rgb = CARD_BORDER
+    inst_box.line.width = Pt(1.5)
 
-    div1 = s1.shapes.add_shape(MSO_SHAPE.RECTANGLE, 0, Inches(1.84), Inches(13.333), Inches(0.015))
-    div1.fill.solid()
-    div1.fill.fore_color.rgb = CARD_BORDER
-    div1.line.fill.background()
-
-    tx1 = s1.shapes.add_textbox(Inches(0.8), Inches(0.22), Inches(11.733), Inches(1.5))
-    tf1 = tx1.text_frame
-    tf1.word_wrap = True
+    tx_inst = s1.shapes.add_textbox(Inches(0.8), Inches(0.48), Inches(11.733), Inches(1.1))
+    tf_inst = tx_inst.text_frame
+    setup_card_tf(tf_inst)
     
-    p_meta = tf1.paragraphs[0]
-    p_meta.text = "NEW HORIZON COLLEGE OF ENGINEERING  •  DEPARTMENT OF COMPUTER SCIENCE & ENGINEERING"
-    p_meta.font.size = Pt(9.5)
-    p_meta.font.bold = True
-    p_meta.font.color.rgb = PRIMARY_BLUE
-    p_meta.space_after = Pt(4)
+    p_inst1 = tf_inst.paragraphs[0]
+    p_inst1.text = "NEW HORIZON COLLEGE OF ENGINEERING"
+    p_inst1.font.size = Pt(17)
+    p_inst1.font.bold = True
+    p_inst1.font.color.rgb = TEXT_WHITE
+    p_inst1.alignment = PP_ALIGN.CENTER
+    p_inst1.space_after = Pt(2)
 
-    p_title = tf1.add_paragraph()
-    p_title.text = "NutriCampus: Health & Nutrition Awareness Platform"
-    p_title.font.size = Pt(25)
-    p_title.font.bold = True
-    p_title.font.color.rgb = TEXT_WHITE
-    p_title.space_after = Pt(3)
+    p_inst2 = tf_inst.add_paragraph()
+    p_inst2.text = "DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING"
+    p_inst2.font.size = Pt(12)
+    p_inst2.font.bold = True
+    p_inst2.font.color.rgb = PRIMARY_BLUE
+    p_inst2.alignment = PP_ALIGN.CENTER
+    p_inst2.space_after = Pt(2)
 
-    p_sub = tf1.add_paragraph()
-    p_sub.text = "Software Requirements Specification (SRS) Presentation  •  Course 25CPD37: Community Project"
-    p_sub.font.size = Pt(11)
-    p_sub.font.color.rgb = TEXT_MUTED
+    p_inst3 = tf_inst.add_paragraph()
+    p_inst3.text = "Course: Community Project using Innovation and Design Thinking (25CPD37 • Semester III)"
+    p_inst3.font.size = Pt(9.5)
+    p_inst3.font.color.rgb = TEXT_MUTED
+    p_inst3.alignment = PP_ALIGN.CENTER
 
-    # Slide 1 Two Cards
-    # Card 1: Problem Definition
-    c1 = s1.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, left_col, Inches(2.15), w_half, Inches(4.65))
-    c1.fill.solid()
-    c1.fill.fore_color.rgb = CARD_BG
-    c1.line.color.rgb = CARD_BORDER
-    c1.line.width = Pt(1.5)
+    # Center Hero Title Box
+    title_box = s1.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), Inches(1.85), Inches(11.733), Inches(2.35))
+    title_box.fill.solid()
+    title_box.fill.fore_color.rgb = CARD_BG
+    title_box.line.color.rgb = CARD_BORDER_BLUE
+    title_box.line.width = Pt(2)
 
-    tx_c1 = s1.shapes.add_textbox(left_col, Inches(2.15), w_half, Inches(4.65))
-    tf_c1 = tx_c1.text_frame
-    setup_card_tf(tf_c1)
-    add_para(tf_c1, "Problem Definition & Context", pt_size=14, bold=True, color=TEXT_WHITE, space_after=10)
-    add_para(tf_c1, "CORE PROBLEM STATEMENT", pt_size=10, bold=True, color=PRIMARY_BLUE, space_after=4)
-    add_para(tf_c1, "\"Undergraduate students face irregular eating routines, screen fatigue, and heavy reliance on nutrient-poor campus canteen meals without accessible dietary guidance.\"", pt_size=11, color=TEXT_LIGHT, space_after=12)
-    
-    add_para(tf_c1, "CRITICAL UNDERGRADUATE PAIN POINTS", pt_size=10, bold=True, color=TEXT_MUTED, space_after=5)
-    add_para(tf_c1, "Irregular meal timing caused by long lab and lecture cycles", pt_size=10.5, bullet=True, space_after=3.5)
-    add_para(tf_c1, "Frequent consumption of high-sodium, ultra-processed canteen snacks", pt_size=10.5, bullet=True, space_after=3.5)
-    add_para(tf_c1, "Chronic daytime dehydration leading to cognitive fatigue", pt_size=10.5, bullet=True, space_after=3.5)
-    add_para(tf_c1, "Existing clinical health applications are overly complex and intimidating", pt_size=10.5, bullet=True, space_after=4)
+    tx_tb = s1.shapes.add_textbox(Inches(0.8), Inches(1.95), Inches(11.733), Inches(2.15))
+    tf_tb = tx_tb.text_frame
+    setup_card_tf(tf_tb)
 
-    # Card 2: System Objectives
-    c2 = s1.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, right_col, Inches(2.15), w_half, Inches(4.65))
-    c2.fill.solid()
-    c2.fill.fore_color.rgb = CARD_BG
-    c2.line.color.rgb = CARD_BORDER_ACTIVE
-    c2.line.width = Pt(1.5)
+    p_badge = tf_tb.paragraphs[0]
+    p_badge.text = "PROJECT PRESENTATION • REQUIREMENTS & ARCHITECTURE"
+    p_badge.font.size = Pt(10)
+    p_badge.font.bold = True
+    p_badge.font.color.rgb = ACCENT_MINT
+    p_badge.alignment = PP_ALIGN.CENTER
+    p_badge.space_after = Pt(6)
 
-    tx_c2 = s1.shapes.add_textbox(right_col, Inches(2.15), w_half, Inches(4.65))
-    tf_c2 = tx_c2.text_frame
-    setup_card_tf(tf_c2)
-    add_para(tf_c2, "System Vision & Core Objectives", pt_size=14, bold=True, color=TEXT_WHITE, space_after=10)
-    add_para(tf_c2, "PRIMARY ENGINEERING OBJECTIVE", pt_size=10, bold=True, color=ACCENT_MINT, space_after=4)
-    add_para(tf_c2, "\"Develop a lightweight, zero-barrier web application translating evidence-based nutritional science into actionable food swaps, hydration tracking, and non-diagnostic self-screening.\"", pt_size=11, color=TEXT_LIGHT, space_after=12)
+    p_maint = tf_tb.add_paragraph()
+    p_maint.text = "Health and Nutrition Awareness Web Application\nfor College Students"
+    p_maint.font.size = Pt(24)
+    p_maint.font.bold = True
+    p_maint.font.color.rgb = TEXT_WHITE
+    p_maint.alignment = PP_ALIGN.CENTER
+    p_maint.space_after = Pt(6)
 
-    add_para(tf_c2, "STRATEGIC SYSTEM DELIVERABLES", pt_size=10, bold=True, color=TEXT_MUTED, space_after=5)
-    add_para(tf_c2, "100% browser-based single-page application requiring zero installation", pt_size=10.5, bullet=True, space_after=3.5)
-    add_para(tf_c2, "Scientifically validated 50-25-25 balanced dietary plate model", pt_size=10.5, bullet=True, space_after=3.5)
-    add_para(tf_c2, "Fluid intake tracker strictly bounded by a 5.0 Liter safety ceiling", pt_size=10.5, bullet=True, space_after=3.5)
-    add_para(tf_c2, "Ethical, non-diagnostic anthropometric BMI screening framework", pt_size=10.5, bullet=True, space_after=4)
+    p_subt = tf_tb.add_paragraph()
+    p_subt.text = "NutriCampus: A Student-Friendly Nutrition, Hydration & Wellness Platform"
+    p_subt.font.size = Pt(12.5)
+    p_subt.font.bold = True
+    p_subt.font.color.rgb = PRIMARY_BLUE
+    p_subt.alignment = PP_ALIGN.CENTER
 
-    add_footer(s1)
+    # Bottom Two Info Cards (Presenters & Mentors)
+    # Presenters Card
+    pres_box = s1.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), Inches(4.45), Inches(5.66), Inches(2.3))
+    pres_box.fill.solid()
+    pres_box.fill.fore_color.rgb = CARD_BG
+    pres_box.line.color.rgb = CARD_BORDER
+    pres_box.line.width = Pt(1.5)
+
+    tx_pres = s1.shapes.add_textbox(Inches(0.8), Inches(4.5), Inches(5.66), Inches(2.2))
+    tf_pres = tx_pres.text_frame
+    setup_card_tf(tf_pres)
+    add_para(tf_pres, "PRESENTED BY (STUDENT TEAM):", pt_size=11, bold=True, color=PRIMARY_BLUE, space_after=6)
+    add_para(tf_pres, "Student Team Member 1  (USN: 1NH25CS___)", pt_size=11, bold=True, color=TEXT_WHITE, space_after=3)
+    add_para(tf_pres, "Student Team Member 2  (USN: 1NH25CS___)", pt_size=11, bold=True, color=TEXT_WHITE, space_after=5)
+    add_para(tf_pres, "Department: Computer Science & Engineering", pt_size=10, color=TEXT_BODY, space_after=2)
+    add_para(tf_pres, "Batch & Academic Term: 3rd Semester B.E. (2026–2027)", pt_size=10, color=TEXT_MUTED, space_after=2)
+
+    # Mentors Card
+    ment_box = s1.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(6.86), Inches(4.45), Inches(5.66), Inches(2.3))
+    ment_box.fill.solid()
+    ment_box.fill.fore_color.rgb = CARD_BG
+    ment_box.line.color.rgb = CARD_BORDER
+    ment_box.line.width = Pt(1.5)
+
+    tx_ment = s1.shapes.add_textbox(Inches(6.86), Inches(4.5), Inches(5.66), Inches(2.2))
+    tf_ment = tx_ment.text_frame
+    setup_card_tf(tf_ment)
+    add_para(tf_ment, "ACADEMIC MENTORSHIP & GUIDANCE:", pt_size=11, bold=True, color=ACCENT_MINT, space_after=6)
+    add_para(tf_ment, "Project Guide & Mentor: Faculty Member, Dept. of CSE", pt_size=10.5, color=TEXT_WHITE, space_after=3)
+    add_para(tf_ment, "Course Coordinator: 25CPD37 Faculty Committee", pt_size=10.5, color=TEXT_WHITE, space_after=3)
+    add_para(tf_ment, "Head of Department: Department of CSE, NHCE", pt_size=10.5, color=TEXT_WHITE, space_after=5)
+    add_para(tf_ment, "Institutional Affiliation: Visvesvaraya Technological University (VTU)", pt_size=9.5, color=TEXT_MUTED, space_after=2)
+
+    # Slide 1 Footer
+    div_f1 = s1.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.8), Inches(6.95), Inches(11.733), Inches(0.015))
+    div_f1.fill.solid()
+    div_f1.fill.fore_color.rgb = CARD_BORDER
+    div_f1.line.fill.background()
+
+    tx_f1 = s1.shapes.add_textbox(Inches(0.8), Inches(7.02), Inches(11.733), Inches(0.3))
+    tf_f1 = tx_f1.text_frame
+    p_f1 = tf_f1.paragraphs[0]
+    p_f1.text = "New Horizon College of Engineering  |  Autonomous College Affiliated to VTU  |  Accredited by NAAC with 'A' Grade"
+    p_f1.font.size = Pt(9)
+    p_f1.font.color.rgb = TEXT_DIM
+    p_f1.alignment = PP_ALIGN.CENTER
 
     set_speaker_notes(s1,
         "WHAT TO SAY OUT LOUD:\n"
-        "\"Good morning respected evaluators and faculty members. We present the Software Requirements Specification for NutriCampus, "
-        "our community engineering project under Course 25CPD37.\n\n"
-        "Undergraduate students routinely experience irregular meal routines, long lab hours, and heavy canteen reliance. "
-        "NutriCampus addresses this reality through a zero-barrier, mobile-responsive web platform that delivers actionable food alternatives, "
-        "safe hydration tracking, and non-diagnostic health self-screening.\""
+        "\"Good morning respected evaluators, project guide, and faculty members. "
+        "We are pleased to present NutriCampus, our Community Engineering Project developed under Course 25CPD37 "
+        "in the Department of Computer Science and Engineering at New Horizon College of Engineering.\n\n"
+        "Our project addresses the vital health, hydration, and nutritional realities faced by undergraduate college students.\""
     )
 
     # =========================================================================
-    # SLIDE 2: Scope & Target Users (Executive Dark)
+    # SLIDE 2: Problem Overview & Scope Boundaries
     # =========================================================================
     s2 = prs.slides.add_slide(blank_layout)
     set_slide_background(s2)
-    add_header(s2, "Scope Boundaries & Target User Profiles", category="PROJECT SCOPE MATRIX • COURSE 25CPD37", slide_num=2)
+    add_header(s2, "Problem Overview & System Scope Boundaries", category="PROJECT SCOPE MATRIX • COURSE 25CPD37", slide_num=2)
 
-    # Left: Scope
+    # Left: Problem Overview
     s2_l = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, left_col, card_top, w_half, card_h)
     s2_l.fill.solid()
     s2_l.fill.fore_color.rgb = CARD_BG
@@ -246,22 +284,21 @@ def create_executive_dark_deck(output_path):
     tx_s2_l = s2.shapes.add_textbox(left_col, card_top, w_half, card_h)
     tf_s2_l = tx_s2_l.text_frame
     setup_card_tf(tf_s2_l)
-    add_para(tf_s2_l, "System Scope Specification", pt_size=14, bold=True, color=TEXT_WHITE, space_after=10)
+    add_para(tf_s2_l, "Problem Definition & Need", pt_size=14, bold=True, color=TEXT_WHITE, space_after=8)
 
-    add_para(tf_s2_l, "IN-SCOPE DELIVERABLES (VERSION 1.0 RELEASE)", pt_size=10, bold=True, color=ACCENT_MINT, space_after=4)
-    add_para(tf_s2_l, "50-25-25 visual balanced meal guidance system", pt_size=10.5, bullet=True, space_after=3)
-    add_para(tf_s2_l, "Campus canteen and hostel food alternative database", pt_size=10.5, bullet=True, space_after=3)
-    add_para(tf_s2_l, "Metric/Imperial anthropometric BMI screening module", pt_size=10.5, bullet=True, space_after=3)
-    add_para(tf_s2_l, "Daily hydration tracker with 5.0 Liter safety ceiling", pt_size=10.5, bullet=True, space_after=3)
-    add_para(tf_s2_l, "Interactive 7-item nutrition myth-busting quiz", pt_size=10.5, bullet=True, space_after=3)
-    add_para(tf_s2_l, "Phase 6 community usability feedback portal", pt_size=10.5, bullet=True, space_after=8)
+    add_para(tf_s2_l, "CORE PROBLEM STATEMENT", pt_size=10, bold=True, color=PRIMARY_BLUE, space_after=3)
+    add_para(tf_s2_l, "\"Undergraduate students face irregular eating schedules, chronic lab fatigue, and heavy reliance on low-nutrient canteen snacks with zero accessible guidance.\"", pt_size=10.5, color=TEXT_LIGHT, space_after=10)
 
-    add_para(tf_s2_l, "OUT-OF-SCOPE EXCLUSIONS (SYSTEM BOUNDARIES)", pt_size=10, bold=True, color=ACCENT_AMBER, space_after=4)
-    add_para(tf_s2_l, "No clinical medical diagnosis or therapeutic prescription regimens", pt_size=10.5, bullet=True, space_after=3)
-    add_para(tf_s2_l, "No calorie counting or restrictive dietary prescription models", pt_size=10.5, bullet=True, space_after=3)
-    add_para(tf_s2_l, "No hardware sensors or wearable biometric synchronization", pt_size=10.5, bullet=True, space_after=3)
+    add_para(tf_s2_l, "CRITICAL STUDENT PAIN POINTS", pt_size=10, bold=True, color=TEXT_MUTED, space_after=4)
+    add_para(tf_s2_l, "Irregular meal hours caused by demanding lab schedules", pt_size=10, bullet=True, space_after=2.5)
+    add_para(tf_s2_l, "Heavy intake of ultra-processed, fried canteen snacks", pt_size=10, bullet=True, space_after=2.5)
+    add_para(tf_s2_l, "Daytime dehydration leading to afternoon lecture fatigue", pt_size=10, bullet=True, space_after=2.5)
+    add_para(tf_s2_l, "Clinical health applications are overly complex and intimidating", pt_size=10, bullet=True, space_after=8)
 
-    # Right: Target Users
+    add_para(tf_s2_l, "PRIMARY SYSTEM OBJECTIVE", pt_size=10, bold=True, color=ACCENT_MINT, space_after=3)
+    add_para(tf_s2_l, "Deliver an accessible, zero-barrier web tool translating nutritional science into realistic canteen food swaps, safe hydration tracking, and screening.", pt_size=10, color=TEXT_BODY, space_after=2)
+
+    # Right: Scope Matrix
     s2_r = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, right_col, card_top, w_half, card_h)
     s2_r.fill.solid()
     s2_r.fill.fore_color.rgb = CARD_BG
@@ -271,30 +308,35 @@ def create_executive_dark_deck(output_path):
     tx_s2_r = s2.shapes.add_textbox(right_col, card_top, w_half, card_h)
     tf_s2_r = tx_s2_r.text_frame
     setup_card_tf(tf_s2_r)
-    add_para(tf_s2_r, "Stakeholder & Target User Profiles", pt_size=14, bold=True, color=TEXT_WHITE, space_after=10)
+    add_para(tf_s2_r, "System Scope & Target Users", pt_size=14, bold=True, color=TEXT_WHITE, space_after=8)
 
-    add_para(tf_s2_r, "PRIMARY STUDENT BENEFICIARIES", pt_size=10, bold=True, color=PRIMARY_BLUE, space_after=4)
-    add_para(tf_s2_r, "Hostel Residents & Commuters: Seeking realistic canteen food substitutions.", pt_size=10, bullet=True, space_after=3)
-    add_para(tf_s2_r, "Programming Lab Students: Managing digital eye strain (20-20-20 rule) and hydration.", pt_size=10, bullet=True, space_after=8)
+    add_para(tf_s2_r, "IN-SCOPE DELIVERABLES (VERSION 1.0)", pt_size=10, bold=True, color=ACCENT_MINT, space_after=3)
+    add_para(tf_s2_r, "50-25-25 balanced dietary guidance plate model", pt_size=10, bullet=True, space_after=2)
+    add_para(tf_s2_r, "Campus canteen and hostel food alternative database", pt_size=10, bullet=True, space_after=2)
+    add_para(tf_s2_r, "Metric/Imperial anthropometric BMI screening module", pt_size=10, bullet=True, space_after=2)
+    add_para(tf_s2_r, "Daily fluid tracker with 5.0 Liter safety ceiling", pt_size=10, bullet=True, space_after=2)
+    add_para(tf_s2_r, "Interactive 7-item nutrition myth-busting quiz", pt_size=10, bullet=True, space_after=2)
+    add_para(tf_s2_r, "Community feedback portal for pilot evaluation", pt_size=10, bullet=True, space_after=8)
 
-    add_para(tf_s2_r, "EVALUATION & ACADEMIC STAKEHOLDERS", pt_size=10, bold=True, color=ACCENT_MINT, space_after=4)
-    add_para(tf_s2_r, "Peer Review Cohort: 12+ CSE students testing usability and habit retention.", pt_size=10, bullet=True, space_after=3)
-    add_para(tf_s2_r, "Faculty Evaluators: Reviewing Design Thinking adherence and syllabus compliance.", pt_size=10, bullet=True, space_after=8)
+    add_para(tf_s2_r, "OUT-OF-SCOPE EXCLUSIONS (BOUNDARIES)", pt_size=10, bold=True, color=ACCENT_AMBER, space_after=3)
+    add_para(tf_s2_r, "No clinical medical diagnosis or therapeutic prescription regimens", pt_size=10, bullet=True, space_after=2)
+    add_para(tf_s2_r, "No calorie counting or restrictive dietary prescription models", pt_size=10, bullet=True, space_after=2)
+    add_para(tf_s2_r, "No hardware sensors or wearable biometric synchronization", pt_size=10, bullet=True, space_after=8)
 
-    add_para(tf_s2_r, "DEPLOYMENT ENVIRONMENT", pt_size=10, bold=True, color=TEXT_MUTED, space_after=4)
-    add_para(tf_s2_r, "Universal web browsers: Chrome, Edge, Safari across mobile and desktop devices.", pt_size=10, bullet=True, space_after=3)
+    add_para(tf_s2_r, "TARGET STAKEHOLDERS", pt_size=10, bold=True, color=PRIMARY_BLUE, space_after=3)
+    add_para(tf_s2_r, "Undergraduate students, hostelites, lab programmers, and 12+ peer testers.", pt_size=10, color=TEXT_BODY, space_after=2)
 
     set_speaker_notes(s2,
         "WHAT TO SAY OUT LOUD:\n"
-        "\"In Slide 2, we establish our system boundaries and user profiles.\n\n"
+        "\"In Slide 2, we establish our core problem definition and system boundaries.\n\n"
+        "Undergraduate students routinely experience irregular meal routines, long lab hours, and heavy canteen reliance. "
         "In Scope for v1, we provide six core modules: visual meal portioning, practical canteen swaps, metric BMI screening, "
         "a safe hydration tracker capped at 5 liters, educational quizzes, and community feedback.\n\n"
-        "Out of Scope, we draw a clear line excluding clinical medical diagnosis, restrictive calorie counting, or hardware sensors. "
-        "Our primary stakeholders are undergraduate students, hostel residents, lab programmers, and our peer evaluation cohort.\""
+        "Out of Scope, we draw a clear line excluding clinical medical diagnosis, restrictive calorie counting, or hardware sensors.\""
     )
 
     # =========================================================================
-    # SLIDE 3: Functional Requirements & Architecture (Executive Dark)
+    # SLIDE 3: System Architecture & Core Functional Requirements
     # =========================================================================
     s3 = prs.slides.add_slide(blank_layout)
     set_slide_background(s3)
@@ -330,7 +372,7 @@ def create_executive_dark_deck(output_path):
     s3_r = s3.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, right_col, card_top, w_half, card_h)
     s3_r.fill.solid()
     s3_r.fill.fore_color.rgb = CARD_BG
-    s3_r.line.color.rgb = CARD_BORDER_ACTIVE
+    s3_r.line.color.rgb = CARD_BORDER_BLUE
     s3_r.line.width = Pt(1.5)
 
     tx_s3_r = s3.shapes.add_textbox(right_col, card_top, w_half, card_h)
@@ -363,11 +405,11 @@ def create_executive_dark_deck(output_path):
     )
 
     # =========================================================================
-    # SLIDE 4: Non-Functional Requirements & Constraints (Executive Dark)
+    # SLIDE 4: Non-Functional Requirements, Security & Medical Ethics
     # =========================================================================
     s4 = prs.slides.add_slide(blank_layout)
     set_slide_background(s4)
-    add_header(s4, "Non-Functional Requirements & Constraints", category="SYSTEM QUALITY STANDARDS • COURSE 25CPD37", slide_num=4)
+    add_header(s4, "Non-Functional Requirements & Medical Ethics", category="SYSTEM QUALITY STANDARDS • COURSE 25CPD37", slide_num=4)
 
     # Left: Performance & Security
     s4_l = s4.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, left_col, card_top, w_half, card_h)
@@ -427,7 +469,7 @@ def create_executive_dark_deck(output_path):
     )
 
     # =========================================================================
-    # SLIDE 5: Summary & Key Takeaways (Executive Dark)
+    # SLIDE 5: Executive Summary & Evaluation Discussion (Completely Clean)
     # =========================================================================
     s5 = prs.slides.add_slide(blank_layout)
     set_slide_background(s5)
@@ -460,7 +502,7 @@ def create_executive_dark_deck(output_path):
     p2_box = s5.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, c2_x, h_top, card_w3, card_h3)
     p2_box.fill.solid()
     p2_box.fill.fore_color.rgb = CARD_BG
-    p2_box.line.color.rgb = CARD_BORDER_ACTIVE
+    p2_box.line.color.rgb = CARD_BORDER_BLUE
     p2_box.line.width = Pt(1.5)
 
     tx_p2 = s5.shapes.add_textbox(c2_x, h_top, card_w3, card_h3)
@@ -488,7 +530,7 @@ def create_executive_dark_deck(output_path):
     add_para(tf_p3, "MEASURABLE OUTCOMES", pt_size=9.5, bold=True, color=TEXT_MUTED, space_after=3)
     add_para(tf_p3, "100% reported adopting healthier habits with zero unhandled client exceptions or crashes.", pt_size=10, space_after=2)
 
-    # Executive Bottom Callout
+    # Clean Executive Conclusion Banner (NO URLs)
     term_box = s5.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), Inches(5.32), Inches(11.733), Inches(1.48))
     term_box.fill.solid()
     term_box.fill.fore_color.rgb = HEADER_BG
@@ -500,18 +542,26 @@ def create_executive_dark_deck(output_path):
     setup_card_tf(tf_term)
 
     p_term_q = tf_term.paragraphs[0]
-    p_term_q.text = "QUESTIONS & EVALUATION DISCUSSION"
-    p_term_q.font.size = Pt(14)
+    p_term_q.text = "THANK YOU!"
+    p_term_q.font.size = Pt(18)
     p_term_q.font.bold = True
-    p_term_q.font.color.rgb = PRIMARY_BLUE
+    p_term_q.font.color.rgb = TEXT_WHITE
     p_term_q.alignment = PP_ALIGN.CENTER
-    p_term_q.space_after = Pt(4)
+    p_term_q.space_after = Pt(3)
 
-    p_term_lnk = tf_term.add_paragraph()
-    p_term_lnk.text = "Live Deployment: https://nutri-campus-health-nutrition.vercel.app  |  Source Code: github.com/Prapulcode/NutriCampus-Health-Nutrition"
-    p_term_lnk.font.size = Pt(10)
-    p_term_lnk.font.color.rgb = TEXT_BODY
-    p_term_lnk.alignment = PP_ALIGN.CENTER
+    p_term_sub = tf_term.add_paragraph()
+    p_term_sub.text = "Questions, Feedback & Evaluation Discussion"
+    p_term_sub.font.size = Pt(13)
+    p_term_sub.font.bold = True
+    p_term_sub.font.color.rgb = PRIMARY_BLUE
+    p_term_sub.alignment = PP_ALIGN.CENTER
+    p_term_sub.space_after = Pt(4)
+
+    p_term_ack = tf_term.add_paragraph()
+    p_term_ack.text = "Department of Computer Science & Engineering  |  New Horizon College of Engineering, Bengaluru"
+    p_term_ack.font.size = Pt(9.5)
+    p_term_ack.font.color.rgb = TEXT_MUTED
+    p_term_ack.alignment = PP_ALIGN.CENTER
 
     set_speaker_notes(s5,
         "WHAT TO SAY OUT LOUD:\n"
@@ -522,25 +572,31 @@ def create_executive_dark_deck(output_path):
         "Thank you respected faculty and evaluators. We now open the floor for your questions!\""
     )
 
-    try:
-        prs.save(output_path)
-        print(f"[SUCCESS] Executive Dark Professional 5-Slide Presentation generated: {output_path}")
-    except PermissionError:
-        fallback_path = output_path.replace(".pptx", "_Updated.pptx")
-        prs.save(fallback_path)
-        print(f"[NOTICE] '{os.path.basename(output_path)}' is currently open in PowerPoint.")
-        print(f"[SUCCESS] Saved updated version to: {fallback_path}")
-        print("Please close PowerPoint to replace the main presentation file directly.")
+    target_files = [
+        output_path,
+        os.path.join(os.path.dirname(output_path), "NutriCampus_Professional_Dark_Presentation.pptx"),
+        os.path.join(os.path.dirname(output_path), "NutriCampus_SRS_Presentation.pptx"),
+        os.path.join(os.path.dirname(output_path), "NutriCampus_Executive_Deck_Final.pptx")
+    ]
+    
+    saved_paths = []
+    for p in target_files:
+        try:
+            prs.save(p)
+            print(f"[SUCCESS] Saved presentation to: {p}")
+            saved_paths.append(p)
+        except PermissionError:
+            print(f"[NOTICE] {os.path.basename(p)} is currently open in PowerPoint. Skipping...")
+        except Exception as e:
+            print(f"[ERROR] Could not save {p}: {e}")
 
-    # Also save an executive standalone copy
-    exec_path = os.path.join(os.path.dirname(output_path), "NutriCampus_Executive_Dark_Deck.pptx")
-    try:
-        prs.save(exec_path)
-        print(f"[SUCCESS] Executive Dark Copy generated: {exec_path}")
-    except Exception:
-        pass
+    if not saved_paths:
+        import time
+        ts_path = os.path.join(os.path.dirname(output_path), f"NutriCampus_Deck_{int(time.time())}.pptx")
+        prs.save(ts_path)
+        print(f"[SUCCESS] Saved with timestamp fallback: {ts_path}")
 
 if __name__ == "__main__":
     out_dir = r"C:\Users\hi\.gemini\antigravity\scratch\NutriCampus-Health-Nutrition"
     out_file = os.path.join(out_dir, "NutriCampus_5Slide_SRS_Deck.pptx")
-    create_executive_dark_deck(out_file)
+    build_executive_deck(out_file)
