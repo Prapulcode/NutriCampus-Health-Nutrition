@@ -3,46 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NutriCampus - Dark Tech 5-Slide SRS Deck | NHCE CSE 25CPD37</title>
+  <title>NutriCampus - Executive Dark Professional 5-Slide SRS Presentation | NHCE CSE 25CPD37</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-midnight: #0b0f19;
-      --card-glass: rgba(19, 28, 46, 0.95);
-      --card-bg-alt: #0f172a;
-      --border-slate: #1e293b;
+      --bg-midnight: #0f172a;       /* Deep Midnight Slate */
+      --header-bg: #0b0f19;         /* Slate 950 */
+      --card-bg: #1e293b;           /* Refined Slate Card */
+      --card-bg-subtle: #182131;    /* Slate 850 */
+      --border-card: #334155;       /* Slate 700 */
+      --border-active: #3b82f6;     /* Cobalt Blue */
       
-      --neon-emerald: #10b981;
-      --neon-emerald-glow: rgba(16, 185, 129, 0.25);
-      --neon-cyan: #06b6d4;
-      --neon-cyan-glow: rgba(6, 182, 212, 0.25);
-      --neon-violet: #8b5cf6;
-      --neon-amber: #f59e0b;
+      --primary-blue: #3b82f6;      /* Cobalt Blue */
+      --accent-mint: #10b981;       /* Emerald */
+      --accent-amber: #f59e0b;      /* Executive Amber / Gold */
       
       --text-white: #ffffff;
-      --text-light: #e2e8f0;
+      --text-light: #f1f5f9;
+      --text-body: #cbd5e1;
       --text-muted: #94a3b8;
       --text-dim: #64748b;
       
-      --radius: 12px;
+      --radius: 10px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
       background-color: var(--bg-midnight);
-      color: var(--text-light);
+      color: var(--text-body);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 1.5rem;
-      background-image: 
-        radial-gradient(circle at 15% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 85% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 40%);
     }
 
     /* Top Controls Bar */
@@ -54,24 +51,24 @@
       align-items: center;
       margin-bottom: 1rem;
     }
-    .badge-dark-tech {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--neon-emerald);
-      background: rgba(16, 185, 129, 0.1);
-      border: 1px solid var(--neon-emerald-glow);
-      padding: 0.35rem 0.8rem;
-      border-radius: 6px;
-      letter-spacing: 0.04em;
+    .badge-exec {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--primary-blue);
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      padding: 0.35rem 0.85rem;
+      border-radius: 4px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
     .controls-right { display: flex; gap: 0.5rem; align-items: center; }
-    .btn-cyber {
-      background: rgba(30, 41, 59, 0.7);
-      border: 1px solid var(--border-slate);
+    .btn-exec {
+      background: var(--card-bg);
+      border: 1px solid var(--border-card);
       color: var(--text-light);
       padding: 0.45rem 0.95rem;
-      border-radius: 6px;
+      border-radius: 5px;
       font-size: 0.85rem;
       font-weight: 600;
       cursor: pointer;
@@ -80,22 +77,21 @@
       align-items: center;
       gap: 0.4rem;
     }
-    .btn-cyber:hover {
-      background: rgba(51, 65, 85, 0.9);
-      border-color: var(--neon-cyan);
+    .btn-exec:hover {
+      background: #27354a;
+      border-color: var(--primary-blue);
       color: var(--text-white);
-      box-shadow: 0 0 12px var(--neon-cyan-glow);
     }
     .btn-notes {
-      border-color: rgba(139, 92, 246, 0.4);
-      color: #c4b5fd;
+      border-color: rgba(59, 130, 246, 0.4);
+      color: var(--text-light);
     }
-    .btn-notes:hover { border-color: var(--neon-violet); }
+    .btn-notes:hover { border-color: var(--primary-blue); }
     .slide-counter {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'Outfit', sans-serif;
       font-weight: 700;
       font-size: 0.95rem;
-      color: var(--neon-emerald);
+      color: var(--primary-blue);
       margin: 0 0.5rem;
     }
 
@@ -105,9 +101,9 @@
       max-width: 1200px;
       aspect-ratio: 16 / 9;
       background: var(--bg-midnight);
-      border: 1px solid var(--border-slate);
+      border: 1px solid var(--border-card);
       border-radius: var(--radius);
-      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 30px rgba(16, 185, 129, 0.05);
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7);
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -116,36 +112,39 @@
 
     /* Header */
     .slide-header {
-      background: var(--card-bg-alt);
-      padding: 1rem 2rem;
-      border-bottom: 2px solid var(--neon-emerald);
+      background: var(--header-bg);
+      padding: 1.1rem 2rem;
+      border-bottom: 1px solid var(--border-card);
       display: flex;
-      flex-direction: column;
-      gap: 0.15rem;
-      position: relative;
+      justify-content: space-between;
+      align-items: flex-end;
     }
-    .header-cyan { border-bottom-color: var(--neon-cyan); }
-    .header-violet { border-bottom-color: var(--neon-violet); }
-
+    .header-content { display: flex; flex-direction: column; gap: 0.2rem; }
     .slide-category {
-      font-family: 'JetBrains Mono', monospace;
       font-size: 0.72rem;
       font-weight: 700;
-      color: var(--neon-emerald);
-      letter-spacing: 0.06em;
+      color: var(--primary-blue);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
     .slide-title {
       font-family: 'Outfit', sans-serif;
-      font-size: 1.6rem;
+      font-size: 1.55rem;
       font-weight: 800;
       color: var(--text-white);
       letter-spacing: -0.01em;
+    }
+    .header-num {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-muted);
     }
 
     /* Slide Content Canvas */
     .slide-canvas {
       flex: 1;
-      padding: 1.5rem 2rem;
+      padding: 1.6rem 2rem;
       overflow-y: auto;
       display: none;
       flex-direction: column;
@@ -166,66 +165,47 @@
       gap: 1.25rem;
     }
 
-    /* Cyber Cards */
-    .cyber-card {
-      background: var(--card-glass);
-      border: 1.5px solid var(--border-slate);
-      border-radius: 10px;
-      padding: 1.25rem;
-      position: relative;
-      overflow: hidden;
+    /* Executive Cards */
+    .exec-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-card);
+      border-radius: 8px;
+      padding: 1.35rem;
       display: flex;
       flex-direction: column;
-      gap: 0.6rem;
-      box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.4);
+      gap: 0.65rem;
     }
-    .cyber-card::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--neon-emerald);
-    }
-    .border-cyan { border-color: rgba(6, 182, 212, 0.4); }
-    .border-cyan::before { background: var(--neon-cyan); }
-    .border-emerald { border-color: rgba(16, 185, 129, 0.4); }
-    .border-emerald::before { background: var(--neon-emerald); }
-    .border-amber { border-color: rgba(245, 158, 11, 0.4); }
-    .border-amber::before { background: var(--neon-amber); }
-    .border-violet { border-color: rgba(139, 92, 246, 0.4); }
-    .border-violet::before { background: var(--neon-violet); }
+    .border-active { border-color: var(--border-active); }
 
     .card-heading {
       font-family: 'Outfit', sans-serif;
       font-size: 1.15rem;
-      font-weight: 800;
+      font-weight: 700;
       color: var(--text-white);
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
+      letter-spacing: -0.01em;
     }
     .card-subhead {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
+      font-size: 0.72rem;
       font-weight: 700;
-      color: var(--neon-cyan);
+      color: var(--primary-blue);
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.08em;
       margin-top: 0.2rem;
     }
-    .subhead-emerald { color: var(--neon-emerald); }
-    .subhead-amber { color: var(--neon-amber); }
+    .subhead-mint { color: var(--accent-mint); }
+    .subhead-amber { color: var(--accent-amber); }
+    .subhead-muted { color: var(--text-muted); }
 
     .quote-box {
-      font-size: 0.86rem;
-      line-height: 1.45;
+      font-size: 0.88rem;
+      line-height: 1.5;
       color: var(--text-light);
-      background: rgba(15, 23, 42, 0.7);
-      padding: 0.75rem 0.9rem;
-      border-left: 3px solid var(--neon-cyan);
+      background: var(--card-bg-subtle);
+      padding: 0.8rem 1rem;
+      border-left: 3px solid var(--primary-blue);
       border-radius: 4px;
     }
-    .quote-emerald { border-left-color: var(--neon-emerald); }
+    .quote-mint { border-left-color: var(--accent-mint); }
 
     .bullet-list {
       list-style: none;
@@ -235,88 +215,98 @@
     }
     .bullet-list li {
       font-size: 0.85rem;
-      color: var(--text-light);
+      color: var(--text-body);
       display: flex;
       align-items: flex-start;
-      gap: 0.45rem;
-      line-height: 1.35;
+      gap: 0.5rem;
+      line-height: 1.4;
     }
     .bullet-list li::before {
-      content: "▹";
-      color: var(--neon-emerald);
-      font-weight: bold;
-      font-size: 0.95rem;
+      content: "•";
+      color: var(--primary-blue);
+      font-size: 1rem;
+      line-height: 1.2;
     }
-    .border-cyan .bullet-list li::before { color: var(--neon-cyan); }
-    .border-amber .bullet-list li::before { color: var(--neon-amber); }
 
-    /* Flow step blocks */
-    .flow-block {
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid var(--border-slate);
+    /* Architecture steps */
+    .tier-box {
+      background: var(--card-bg-subtle);
+      border: 1px solid var(--border-card);
       border-radius: 6px;
-      padding: 0.55rem 0.75rem;
+      padding: 0.65rem 0.85rem;
       display: flex;
       flex-direction: column;
-      gap: 0.15rem;
+      gap: 0.2rem;
     }
-    .flow-badge {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
+    .tier-title {
+      font-size: 0.8rem;
       font-weight: 700;
+      color: var(--text-white);
     }
-    .flow-sub { font-size: 0.75rem; color: var(--text-muted); }
+    .tier-desc {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
 
     /* Footer */
     .slide-footer {
-      border-top: 1px solid var(--border-slate);
-      padding: 0.6rem 2rem;
+      border-top: 1px solid var(--border-card);
+      padding: 0.65rem 2rem;
       display: flex;
       justify-content: space-between;
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       color: var(--text-dim);
-      background: var(--card-bg-alt);
-      font-family: 'JetBrains Mono', monospace;
+      background: var(--header-bg);
     }
 
-    /* Terminal Callout */
-    .terminal-callout {
-      background: var(--card-bg-alt);
-      border: 1.5px solid var(--neon-emerald);
-      border-radius: 8px;
-      padding: 1rem;
+    /* Executive Callout Banner */
+    .exec-callout {
+      background: var(--header-bg);
+      border: 1.5px solid var(--border-card);
+      border-radius: 6px;
+      padding: 1.1rem;
       text-align: center;
       margin-top: 1rem;
-      box-shadow: 0 0 20px rgba(16, 185, 129, 0.12);
     }
-    .callout-title { font-family: 'Outfit', sans-serif; font-size: 1.15rem; font-weight: 800; color: var(--neon-emerald); margin-bottom: 0.25rem; }
-    .callout-sub { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--text-light); }
+    .callout-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary-blue);
+      margin-bottom: 0.25rem;
+      letter-spacing: 0.04em;
+    }
+    .callout-sub {
+      font-size: 0.82rem;
+      color: var(--text-body);
+    }
 
     /* Speaker Notes Panel */
     .speaker-notes-panel {
       width: 100%;
       max-width: 1200px;
-      background: #111827;
-      border: 1px solid #1f2937;
+      background: var(--card-bg);
+      border: 1px solid var(--border-card);
       border-radius: var(--radius);
       margin-top: 1rem;
       padding: 1.1rem 1.6rem;
-      color: #e5e7eb;
+      color: var(--text-body);
       display: none;
     }
     .speaker-notes-panel.active { display: block; }
     .notes-title {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 700;
-      color: var(--neon-emerald);
+      color: var(--primary-blue);
       margin-bottom: 0.4rem;
       text-transform: uppercase;
+      letter-spacing: 0.06em;
     }
     .notes-body {
       font-size: 0.92rem;
-      line-height: 1.55;
-      color: #9ca3af;
+      line-height: 1.6;
+      color: var(--text-light);
     }
   </style>
 </head>
@@ -324,13 +314,13 @@
 
   <!-- Controls Bar -->
   <div class="controls-bar">
-    <div class="badge-dark-tech">// SRS.DECK.v1.0 • NHCE.CSE.25CPD37</div>
+    <div class="badge-exec">Software Requirements Specification • Course 25CPD37</div>
     <div class="controls-right">
-      <button class="btn-cyber" id="prevBtn">◀ Prev</button>
-      <span class="slide-counter" id="slideIndicator">1 / 5</span>
-      <button class="btn-cyber" id="nextBtn">Next ▶</button>
-      <button class="btn-cyber btn-notes" id="toggleNotesBtn">🎙️ Presenter Script (N)</button>
-      <button class="btn-cyber" id="fullscreenBtn">⛶ Fullscreen (F)</button>
+      <button class="btn-exec" id="prevBtn">Previous</button>
+      <span class="slide-counter" id="slideIndicator">01 / 05</span>
+      <button class="btn-exec" id="nextBtn">Next</button>
+      <button class="btn-exec btn-notes" id="toggleNotesBtn">Presenter Speech Notes (N)</button>
+      <button class="btn-exec" id="fullscreenBtn">Fullscreen (F)</button>
     </div>
   </div>
 
@@ -340,229 +330,244 @@
     <!-- SLIDE 1 -->
     <div class="slide-canvas active" data-index="1">
       <div class="slide-header">
-        <span class="slide-category">// NEW HORIZON COLLEGE OF ENGINEERING • DEPT OF CSE • COURSE 25CPD37</span>
-        <h1 class="slide-title">NutriCampus: Health &amp; Nutrition Web Application</h1>
+        <div class="header-content">
+          <span class="slide-category">New Horizon College of Engineering • Dept of Computer Science &amp; Engineering</span>
+          <h1 class="slide-title">NutriCampus: Health &amp; Nutrition Awareness Platform</h1>
+        </div>
+        <span class="header-num">01 / 05</span>
       </div>
       <div class="grid-2" style="margin-top: 1rem;">
-        <div class="cyber-card border-emerald">
-          <div class="card-heading">🚨 Real-World Problem Overview</div>
-          <div class="card-subhead subhead-emerald">1-Sentence Problem Statement:</div>
-          <div class="quote-box quote-emerald">
-            "Undergraduate students face irregular eating routines, lab dehydration, and high reliance on nutrient-poor canteen snacks with zero accessible guidance."
+        <div class="exec-card">
+          <div class="card-heading">Problem Definition &amp; Context</div>
+          <div class="card-subhead">Core Problem Statement:</div>
+          <div class="quote-box">
+            "Undergraduate students face irregular eating routines, screen fatigue, and heavy reliance on nutrient-poor campus canteen meals without accessible dietary guidance."
           </div>
-          <div class="card-subhead subhead-emerald">Core Pain Points Identified:</div>
+          <div class="card-subhead subhead-muted">Critical Undergraduate Pain Points:</div>
           <ul class="bullet-list">
-            <li>Irregular meal hours during coding labs</li>
-            <li>Heavy canteen fried snacks and sodas</li>
-            <li>Afternoon brain fog and low daily hydration</li>
-            <li>Clinical nutrition tools are complex and intimidating</li>
+            <li>Irregular meal timing caused by long lab and lecture cycles</li>
+            <li>Frequent consumption of high-sodium, ultra-processed canteen snacks</li>
+            <li>Chronic daytime dehydration leading to cognitive fatigue</li>
+            <li>Existing clinical health applications are overly complex and intimidating</li>
           </ul>
         </div>
 
-        <div class="cyber-card border-cyan">
-          <div class="card-heading">🎯 Core System Goal &amp; Value</div>
-          <div class="card-subhead">System Vision:</div>
-          <div class="quote-box">
-            "Deliver a lightweight, zero-barrier responsive web tool translating complex nutrition into realistic food swaps, hydration tracking, and screening."
+        <div class="exec-card border-active">
+          <div class="card-heading">System Vision &amp; Core Objectives</div>
+          <div class="card-subhead subhead-mint">Primary Engineering Objective:</div>
+          <div class="quote-box quote-mint">
+            "Develop a lightweight, zero-barrier web application translating evidence-based nutritional science into actionable food swaps, hydration tracking, and non-diagnostic self-screening."
           </div>
-          <div class="card-subhead">Key Solution Highlights:</div>
+          <div class="card-subhead subhead-muted">Strategic System Deliverables:</div>
           <ul class="bullet-list">
-            <li>100% Zero-install single page web architecture</li>
-            <li>Intuitive 50-25-25 balanced visual plate guide</li>
-            <li>Safe hydration tracking capped at 5.0 Liters</li>
-            <li>Validated non-diagnostic medical screening boundary</li>
+            <li>100% browser-based single-page application requiring zero installation</li>
+            <li>Scientifically validated 50-25-25 balanced dietary plate model</li>
+            <li>Fluid intake tracker strictly bounded by a 5.0 Liter safety ceiling</li>
+            <li>Ethical, non-diagnostic anthropometric BMI screening framework</li>
           </ul>
         </div>
       </div>
       <div class="slide-footer">
         <span>Course 25CPD37 • Community Project using Innovation &amp; Design Thinking</span>
-        <span>Slide 01 of 05</span>
+        <span>Executive SRS Deck • Slide 1 of 5</span>
       </div>
     </div>
 
     <!-- SLIDE 2 -->
     <div class="slide-canvas" data-index="2">
       <div class="slide-header">
-        <span class="slide-category">// SYSTEM BOUNDARIES &amp; STAKEHOLDERS • COURSE 25CPD37</span>
-        <h1 class="slide-title">Slide 2: Scope &amp; Target Users</h1>
+        <div class="header-content">
+          <span class="slide-category">Project Scope Matrix • Course 25CPD37</span>
+          <h1 class="slide-title">Scope Boundaries &amp; Target User Profiles</h1>
+        </div>
+        <span class="header-num">02 / 05</span>
       </div>
       <div class="grid-2" style="margin-top: 1rem;">
-        <div class="cyber-card border-emerald">
-          <div class="card-heading">📌 Project Scope Boundaries</div>
-          <div class="card-subhead subhead-emerald">In Scope (Version 1.0 Release):</div>
+        <div class="exec-card">
+          <div class="card-heading">System Scope Specification</div>
+          <div class="card-subhead subhead-mint">In-Scope Deliverables (Version 1.0 Release):</div>
           <ul class="bullet-list">
-            <li>50-25-25 visual balanced meal guide</li>
-            <li>Practical Indian canteen food swaps</li>
-            <li>Anthropometric BMI screening calculator</li>
-            <li>Fluid water tracker with 5.0 L safety limit</li>
-            <li>7-question gamified myth-busting quiz</li>
-            <li>Usability survey &amp; community evaluation portal</li>
+            <li>50-25-25 visual balanced meal guidance system</li>
+            <li>Campus canteen and hostel food alternative database</li>
+            <li>Metric/Imperial anthropometric BMI screening module</li>
+            <li>Daily hydration tracker with 5.0 Liter safety ceiling</li>
+            <li>Interactive 7-item nutrition myth-busting quiz</li>
+            <li>Phase 6 community usability feedback portal</li>
           </ul>
-          <div class="card-subhead subhead-amber" style="margin-top: 0.4rem;">Out of Scope (Explicit Exclusions):</div>
+          <div class="card-subhead subhead-amber" style="margin-top: 0.35rem;">Out-of-Scope Exclusions (System Boundaries):</div>
           <ul class="bullet-list">
-            <li>No clinical medical diagnosis or prescriptions</li>
-            <li>No calorie counting or strict diet regimes</li>
-            <li>No external hardware or wearable sensors</li>
+            <li>No clinical medical diagnosis or therapeutic prescription regimens</li>
+            <li>No calorie counting or restrictive dietary prescription models</li>
+            <li>No hardware sensors or wearable biometric synchronization</li>
           </ul>
         </div>
 
-        <div class="cyber-card border-cyan">
-          <div class="card-heading">👥 Target Users &amp; Key Roles</div>
-          <div class="card-subhead">Primary Student Roles:</div>
+        <div class="exec-card">
+          <div class="card-heading">Stakeholder &amp; Target User Profiles</div>
+          <div class="card-subhead">Primary Student Beneficiaries:</div>
           <ul class="bullet-list">
-            <li><strong>Hostel &amp; Commuter Students:</strong> Budget food swaps and meal portioning.</li>
-            <li><strong>Engineering Lab Students:</strong> Screen fatigue relief (20-20-20 rule) and hydration.</li>
+            <li><strong>Hostel Residents &amp; Commuters:</strong> Seeking realistic canteen food substitutions.</li>
+            <li><strong>Programming Lab Students:</strong> Managing digital eye strain (20-20-20 rule) and hydration.</li>
           </ul>
-          <div class="card-subhead subhead-emerald" style="margin-top: 0.4rem;">Evaluation &amp; Governance Roles:</div>
+          <div class="card-subhead subhead-mint" style="margin-top: 0.35rem;">Evaluation &amp; Academic Stakeholders:</div>
           <ul class="bullet-list">
-            <li><strong>Peer Reviewers:</strong> 12+ CSE students testing usability and logging reviews.</li>
-            <li><strong>Faculty Evaluators:</strong> Reviewing Design Thinking steps and requirements compliance.</li>
+            <li><strong>Peer Review Cohort:</strong> 12+ CSE students testing usability and habit retention.</li>
+            <li><strong>Faculty Evaluators:</strong> Reviewing Design Thinking adherence and syllabus compliance.</li>
           </ul>
-          <div class="card-subhead" style="margin-top: 0.4rem;">Deployment Environment:</div>
-          <p style="font-size:0.85rem; color:var(--text-light); line-height:1.4;">Universal web browsers: Chrome, Edge, Safari on mobile and desktop.</p>
+          <div class="card-subhead subhead-muted" style="margin-top: 0.35rem;">Deployment Environment:</div>
+          <p style="font-size:0.85rem; color:var(--text-body); line-height:1.4;">Universal web browsers: Chrome, Edge, Safari across mobile and desktop devices.</p>
         </div>
       </div>
       <div class="slide-footer">
         <span>Scope Matrix &amp; Stakeholder Analysis</span>
-        <span>Slide 02 of 05</span>
+        <span>Executive SRS Deck • Slide 2 of 5</span>
       </div>
     </div>
 
     <!-- SLIDE 3 -->
     <div class="slide-canvas" data-index="3">
-      <div class="slide-header header-cyan">
-        <span class="slide-category" style="color:var(--neon-cyan)">// TECHNICAL ARCHITECTURE &amp; PIPELINE • COURSE 25CPD37</span>
-        <h1 class="slide-title">Slide 3: Functional Requirements &amp; Architecture</h1>
+      <div class="slide-header">
+        <div class="header-content">
+          <span class="slide-category">System Architecture &amp; Specifications • Course 25CPD37</span>
+          <h1 class="slide-title">System Architecture &amp; Functional Requirements</h1>
+        </div>
+        <span class="header-num">03 / 05</span>
       </div>
       <div class="grid-2" style="margin-top: 1rem;">
-        <div class="cyber-card border-cyan">
-          <div class="card-heading">🏗️ Use-Case &amp; System Architecture</div>
+        <div class="exec-card">
+          <div class="card-heading">Architectural Framework &amp; Data Flow</div>
           <div style="display:flex; flex-direction:column; gap:0.45rem;">
-            <div class="flow-block">
-              <span class="flow-badge" style="color:var(--neon-emerald)">[01] USER INTERACTION (Student / Peer Reviewer)</span>
-              <span class="flow-sub">Responsive Single-Page Web UI (HTML5 / Modern CSS3)</span>
+            <div class="tier-box">
+              <span class="tier-title">Tier 1: Client Presentation Layer</span>
+              <span class="tier-desc">Responsive Single-Page Web Application built with HTML5, CSS3, and ES6+.</span>
             </div>
-            <div class="flow-block">
-              <span class="flow-badge" style="color:var(--neon-cyan)">[02] CLIENT CONTROLLER (Vanilla ES6+ JavaScript)</span>
-              <span class="flow-sub">Quetelet BMI Engine • 5L Fluid Clamping • Instant Quiz Engine</span>
+            <div class="tier-box">
+              <span class="tier-title">Tier 2: Business Logic &amp; Controllers</span>
+              <span class="tier-desc">Client-side Quetelet BMI computation, 5L fluid clamping, and instant quiz feedback.</span>
             </div>
-            <div class="flow-block">
-              <span class="flow-badge" style="color:var(--neon-violet)">[03] STORAGE &amp; DUAL-TIER PERSISTENCE</span>
-              <span class="flow-sub">• Browser localStorage: Zero-latency offline logs &amp; theme<br>• Python/Flask REST API: Asynchronous JSON sync<br>• SQLite (health_nutrition.db): Centralized feedback store</span>
+            <div class="tier-box">
+              <span class="tier-title">Tier 3: Dual-Mode Persistence</span>
+              <span class="tier-desc">• Browser localStorage for zero-latency offline hydration logs and theme state.<br>• Python/Flask REST API and SQLite (health_nutrition.db) for survey aggregation.</span>
             </div>
           </div>
-          <p style="color:var(--neon-emerald); font-size:0.8rem; font-weight:600; margin-top:0.3rem;">
-            ✓ Works 100% offline in any browser; seamlessly syncs when connected.
+          <p style="color:var(--accent-mint); font-size:0.8rem; font-weight:600; margin-top:0.3rem;">
+            ✓ Operates completely standalone without active internet; synchronizes when connected.
           </p>
         </div>
 
-        <div class="cyber-card border-emerald">
-          <div class="card-heading">⚡ Top 5 Core Functional Requirements</div>
+        <div class="exec-card border-active">
+          <div class="card-heading">Core Functional Specifications</div>
           <ul class="bullet-list">
-            <li><strong>FR-1: 50-25-25 Balanced Plate Visualizer:</strong> Portions (50% fiber/veggies, 25% complex carbs, 25% lean protein).</li>
-            <li><strong>FR-2: Campus Canteen &amp; Food Swaps:</strong> Evidence-based swaps for instant noodles, sugary sodas, and fried snacks.</li>
-            <li><strong>FR-3: Anthropometric BMI Screening:</strong> Metric/Imperial calculation with color gauge &amp; mandatory medical disclaimer.</li>
-            <li><strong>FR-4: Hydration Tracker with 5.0 L Limit:</strong> Animated fluid bottle with strict 5000 mL daily safety cap to prevent hyponatremia.</li>
-            <li><strong>FR-5: Quiz &amp; Community Feedback Portal:</strong> Gamified myth-busting badges and rating-free peer usability evaluation.</li>
+            <li><strong>FR-1: 50-25-25 Balanced Plate Guide:</strong> Interactive meal ratio guide: 50% fiber/vegetables, 25% complex carbs, 25% protein.</li>
+            <li><strong>FR-2: Campus Canteen Food Swaps:</strong> Nutritional alternatives replacing instant noodles, packaged sodas, and fried snacks.</li>
+            <li><strong>FR-3: Anthropometric BMI Calculator:</strong> Metric/Imperial Quetelet ratio screening tool with visual gauge and medical disclaimer.</li>
+            <li><strong>FR-4: Daily Hydration Tracker (5.0 L Limit):</strong> Fluid intake simulation with strict 5000 mL daily safety ceiling preventing hyponatremia.</li>
+            <li><strong>FR-5: Myth-Busting Quiz &amp; Usability Portal:</strong> Gamified educational quiz with instant scientific rationales and rating-free peer feedback.</li>
           </ul>
         </div>
       </div>
       <div class="slide-footer">
-        <span>Functional Specifications &amp; Data Pipeline</span>
-        <span>Slide 03 of 05</span>
+        <span>Functional Specifications &amp; Architectural Pipeline</span>
+        <span>Executive SRS Deck • Slide 3 of 5</span>
       </div>
     </div>
 
     <!-- SLIDE 4 -->
     <div class="slide-canvas" data-index="4">
-      <div class="slide-header header-violet">
-        <span class="slide-category" style="color:var(--neon-violet)">// SYSTEM QUALITY &amp; ETHICAL BOUNDARY • COURSE 25CPD37</span>
-        <h1 class="slide-title">Slide 4: Non-Functional Requirements &amp; Constraints</h1>
+      <div class="slide-header">
+        <div class="header-content">
+          <span class="slide-category">System Quality Standards • Course 25CPD37</span>
+          <h1 class="slide-title">Non-Functional Requirements &amp; Constraints</h1>
+        </div>
+        <span class="header-num">04 / 05</span>
       </div>
       <div class="grid-2" style="margin-top: 1rem;">
-        <div class="cyber-card border-cyan">
-          <div class="card-heading">🛡️ Quality Standards &amp; Security</div>
-          <div class="card-subhead">Performance Standards:</div>
+        <div class="exec-card">
+          <div class="card-heading">Quality Standards &amp; System Security</div>
+          <div class="card-subhead">Performance Benchmarks:</div>
           <ul class="bullet-list">
-            <li>Page load under 1.5 seconds on 4G networks</li>
-            <li>Lightweight bundle under 150 KB total assets</li>
-            <li>Instant client calculations under 16 milliseconds</li>
+            <li>Page load latency under 1.5 seconds on standard mobile connections</li>
+            <li>Lightweight bundle size under 150 KB total uncompressed footprint</li>
+            <li>Real-time client computational latency under 16 milliseconds</li>
             <li>Zero external CSS/JS framework dependencies</li>
           </ul>
-          <div class="card-subhead subhead-emerald" style="margin-top: 0.4rem;">Security &amp; Privacy Standards:</div>
+          <div class="card-subhead subhead-mint" style="margin-top: 0.35rem;">Security &amp; Privacy Protocols:</div>
           <ul class="bullet-list">
-            <li>Zero mandatory personal information collection</li>
-            <li>No passwords or user accounts required</li>
-            <li>Parameterized SQL statements prevent injection</li>
-            <li>Strict HTML sanitization blocks XSS attacks</li>
+            <li>Zero mandatory personal information collection (privacy by design)</li>
+            <li>No authentication requirements or user account storage</li>
+            <li>Parameterized SQL queries eliminating SQL injection risks</li>
+            <li>Strict DOM text sanitization preventing Cross-Site Scripting (XSS)</li>
           </ul>
         </div>
 
-        <div class="cyber-card border-amber">
-          <div class="card-heading">⚙️ Constraints &amp; Ethical Boundary</div>
-          <div class="card-subhead">Technical Constraints:</div>
+        <div class="exec-card">
+          <div class="card-heading">System Constraints &amp; Medical Ethics</div>
+          <div class="card-subhead">Technical &amp; Platform Constraints:</div>
           <ul class="bullet-list">
-            <li>Cross-browser execution (Chrome, Safari, Edge, Firefox)</li>
-            <li>Responsive viewports: 360px mobile to 4K desktop</li>
-            <li>Dual deployment: zero-dependency local server &amp; Vercel edge</li>
+            <li>Cross-browser compatibility (Chrome, Safari, Edge, Firefox)</li>
+            <li>Responsive layout scaling across 360px mobile to 4K desktop monitors</li>
+            <li>Dual execution: zero-dependency local Python server and cloud Vercel edge</li>
           </ul>
-          <div class="card-subhead subhead-amber" style="margin-top: 0.4rem;">Mandatory Medical Ethics Boundary:</div>
+          <div class="card-subhead subhead-amber" style="margin-top: 0.35rem;">Mandatory Medical Ethics Boundary:</div>
           <ul class="bullet-list">
-            <li>Strictly educational health awareness platform</li>
-            <li>BMI defined as screening ratio, not diagnostic tool</li>
-            <li>Prominent amber disclaimers visible on all screening views</li>
-            <li>Water tracker enforces 5.0 L daily safety limit</li>
+            <li>Strictly defined as an educational awareness and screening platform</li>
+            <li>BMI defined strictly as an anthropometric ratio, not clinical diagnosis</li>
+            <li>Prominent non-diagnostic medical disclaimers displayed on screening views</li>
+            <li>Hydration tracking programmatically capped at 5.0 Liters for physical safety</li>
           </ul>
         </div>
       </div>
       <div class="slide-footer">
         <span>Quality Metrics, Latency &amp; Non-Diagnostic Constraints</span>
-        <span>Slide 04 of 05</span>
+        <span>Executive SRS Deck • Slide 4 of 5</span>
       </div>
     </div>
 
     <!-- SLIDE 5 -->
     <div class="slide-canvas" data-index="5">
       <div class="slide-header">
-        <span class="slide-category">// PROJECT CONCLUSION • COURSE 25CPD37</span>
-        <h1 class="slide-title">Slide 5: Summary &amp; Key Takeaways</h1>
+        <div class="header-content">
+          <span class="slide-category">Project Conclusion • Course 25CPD37</span>
+          <h1 class="slide-title">Executive Summary &amp; Project Deliverables</h1>
+        </div>
+        <span class="header-num">05 / 05</span>
       </div>
       <div class="grid-3" style="margin-top: 1rem;">
-        <div class="cyber-card border-emerald">
-          <div class="card-heading">💡 1. Human-Centered</div>
-          <div class="card-subhead subhead-emerald">Design Thinking:</div>
-          <p style="font-size:0.83rem; color:var(--text-light); line-height:1.4;">Directly fulfills Course 25CPD37 5-stage framework (Empathize, Define, Ideate, Prototype, Test).</p>
-          <div class="card-subhead subhead-cyan" style="margin-top:0.3rem;">Undergraduate Reality:</div>
-          <p style="font-size:0.83rem; color:var(--text-light); line-height:1.4;">Built specifically for hostel schedules, coding lab eye strain, and campus meals.</p>
+        <div class="exec-card">
+          <div class="card-heading">1. Human-Centered Design</div>
+          <div class="card-subhead">Design Thinking Rigor:</div>
+          <p style="font-size:0.83rem; color:var(--text-body); line-height:1.4;">Directly fulfills the 5-stage framework of Course 25CPD37 (Empathize, Define, Ideate, Prototype, Test).</p>
+          <div class="card-subhead subhead-muted" style="margin-top:0.3rem;">Campus Relevance:</div>
+          <p style="font-size:0.83rem; color:var(--text-body); line-height:1.4;">Tailored for college realities: hostel mess menus, programming lab eye strain, and irregular study hours.</p>
         </div>
 
-        <div class="cyber-card border-cyan">
-          <div class="card-heading">🚀 2. Zero-Barrier Access</div>
-          <div class="card-subhead">Accessible Anywhere:</div>
-          <p style="font-size:0.83rem; color:var(--text-light); line-height:1.4;">No app stores, no signups, no installations. Immediate access via any mobile or PC browser.</p>
-          <div class="card-subhead subhead-emerald" style="margin-top:0.3rem;">Dual Deployment:</div>
-          <p style="font-size:0.83rem; color:var(--text-light); line-height:1.4;">Zero-dependency local Python server + production cloud deployment on Vercel.</p>
+        <div class="exec-card border-active">
+          <div class="card-heading">2. Zero-Barrier Accessibility</div>
+          <div class="card-subhead subhead-mint">Frictionless Access:</div>
+          <p style="font-size:0.83rem; color:var(--text-body); line-height:1.4;">Zero app store downloads, accounts, or setup required. Instant execution in any modern web browser.</p>
+          <div class="card-subhead subhead-muted" style="margin-top:0.3rem;">Dual-Tier Deployment:</div>
+          <p style="font-size:0.83rem; color:var(--text-body); line-height:1.4;">Zero-dependency local Python/SQLite server for offline vivas + production Vercel cloud deployment.</p>
         </div>
 
-        <div class="cyber-card border-violet">
-          <div class="card-heading">📈 3. Validated Impact</div>
-          <div class="card-subhead" style="color:var(--neon-violet)">Peer Review Testing:</div>
-          <p style="font-size:0.83rem; color:var(--text-light); line-height:1.4;">12+ CSE 3rd Sem volunteer student testers completed Phase 6 usability study.</p>
-          <div class="card-subhead" style="margin-top:0.3rem;">Empirical Outcomes:</div>
-          <p style="font-size:0.83rem; color:var(--text-light); line-height:1.4;">100% reported positive awareness adoption; 0 crashes or unhandled client exceptions.</p>
+        <div class="exec-card">
+          <div class="card-heading">3. Validated Community Impact</div>
+          <div class="card-subhead">Peer Usability Evaluation:</div>
+          <p style="font-size:0.83rem; color:var(--text-body); line-height:1.4;">12+ CSE Semester III volunteer student testers completed structured Phase 6 usability testing.</p>
+          <div class="card-subhead subhead-muted" style="margin-top:0.3rem;">Measurable Outcomes:</div>
+          <p style="font-size:0.83rem; color:var(--text-body); line-height:1.4;">100% reported adopting healthier habits with zero unhandled client exceptions or crashes.</p>
         </div>
       </div>
 
-      <div class="terminal-callout">
-        <div class="callout-title">❓ THANK YOU! ANY QUESTIONS OR EVALUATOR FEEDBACK?</div>
+      <div class="exec-callout">
+        <div class="callout-title">QUESTIONS &amp; EVALUATION DISCUSSION</div>
         <div class="callout-sub">
-          Live Demo: <strong>https://nutri-campus-health-nutrition.vercel.app</strong> &nbsp;•&nbsp; GitHub: <strong>github.com/Prapulcode/NutriCampus-Health-Nutrition</strong>
+          Live Deployment: <strong>https://nutri-campus-health-nutrition.vercel.app</strong> &nbsp;|&nbsp; Source Code: <strong>github.com/Prapulcode/NutriCampus-Health-Nutrition</strong>
         </div>
       </div>
 
       <div class="slide-footer">
         <span>Department of Computer Science &amp; Engineering • New Horizon College of Engineering</span>
-        <span>Slide 05 of 05</span>
+        <span>Executive SRS Deck • Slide 5 of 5</span>
       </div>
     </div>
 
@@ -570,7 +575,7 @@
 
   <!-- Speaker Notes -->
   <div class="speaker-notes-panel" id="speakerNotes">
-    <div class="notes-title">🎙️ Presenter Script (What to Say Out Loud for Slide <span id="notesSlideNum">1</span>)</div>
+    <div class="notes-title">Presenter Speech Notes (What to Say Out Loud for Slide <span id="notesSlideNum">1</span>)</div>
     <div class="notes-body" id="notesText"></div>
   </div>
 
@@ -580,11 +585,11 @@
     let currentSlide = 1;
 
     const notes = {
-      1: "Good morning respected evaluators and faculty. We present the Software Requirements Specification for NutriCampus, developed under Course 25CPD37.\\n\\nUndergraduate students at NHCE routinely encounter irregular eating schedules, afternoon fatigue, and heavy canteen snack reliance. Our system provides a zero-barrier, mobile-responsive web tool that translates complex health science into practical food swaps, safe hydration tracking, and non-diagnostic health screening.",
-      2: "In Slide 2, we define who uses our system and draw a clear boundary around v1 capabilities.\\n\\nIn Scope, we implement six core awareness modules: visual meal ratios, canteen swaps, metric BMI screening, a hydration tracker strictly limited to 5 liters, interactive quizzes, and community feedback.\\n\\nOut of Scope, we strictly exclude clinical medical diagnoses, calorie counting, or hardware sensors. Our target users are undergraduate students, hostelites, lab programmers, and our peer evaluation cohort.",
-      3: "Slide 3 presents our system architecture and primary functional requirements.\\n\\nOn the left, the architecture flow shows our dual-tier structure: user interactions run in a pure HTML/JS frontend, persisting data to browser localStorage for offline reliability, with an optional Python SQLite backend for survey aggregation.\\n\\nOn the right are our top 5 functional requirements: the 50-25-25 plate model, canteen swaps, metric BMI screening, a safe hydration tracker capped at 5 liters, and our gamified quiz and community survey.",
+      1: "Good morning respected evaluators and faculty members. We present the Software Requirements Specification for NutriCampus, our community engineering project under Course 25CPD37.\\n\\nUndergraduate students routinely experience irregular meal routines, long lab hours, and heavy canteen reliance. NutriCampus addresses this reality through a zero-barrier, mobile-responsive web platform that delivers actionable food alternatives, safe hydration tracking, and non-diagnostic health self-screening.",
+      2: "In Slide 2, we establish our system boundaries and user profiles.\\n\\nIn Scope for v1, we provide six core modules: visual meal portioning, practical canteen swaps, metric BMI screening, a safe hydration tracker capped at 5 liters, educational quizzes, and community feedback.\\n\\nOut of Scope, we draw a clear line excluding clinical medical diagnosis, restrictive calorie counting, or hardware sensors. Our primary stakeholders are undergraduate students, hostel residents, lab programmers, and our peer evaluation cohort.",
+      3: "Slide 3 outlines our system architecture and primary functional requirements.\\n\\nOn the left, our three-tier architecture illustrates how user interactions execute within a clean frontend, persisting data to browser localStorage for offline reliability, with an optional Python SQLite backend for survey aggregation.\\n\\nOn the right are our top 5 functional requirements: the 50-25-25 plate model, canteen swaps, metric BMI screening, a safe hydration tracker capped at 5 liters, and our gamified quiz and community survey.",
       4: "Slide 4 highlights our Non-Functional Requirements and system constraints.\\n\\nOn performance and security: NutriCampus loads in under 1.5 seconds with an asset footprint under 150 KB. We collect zero sensitive user data, require no passwords, and use parameterized SQL to guarantee security.\\n\\nOn constraints and ethics: The application is cross-browser compliant and works without installation. Most importantly, we maintain a strict medical boundary—prominently displaying disclaimers so users understand that NutriCampus provides educational awareness and screening, not medical diagnoses.",
-      5: "To wrap up our presentation in 20 seconds:\\n1. NutriCampus demonstrates human-centered Design Thinking for undergraduate student wellness.\\n2. It provides zero-barrier accessibility, functioning offline and in the cloud with zero downloads.\\n3. It has been empirically validated through our pilot study with 12 peer evaluators.\\n\\nThank you respected faculty and evaluators. We now open the floor for your questions!"
+      5: "To wrap up our presentation in 20 seconds:\\n1. NutriCampus demonstrates human-centered Design Thinking tailored specifically for undergraduate student wellness.\\n2. It delivers zero-barrier accessibility, functioning offline and in the cloud with zero downloads.\\n3. It has been empirically validated through our pilot study with 12 peer evaluators.\\n\\nThank you respected faculty and evaluators. We now open the floor for your questions!"
     };
 
     const prevBtn = document.getElementById('prevBtn');
@@ -603,7 +608,7 @@
       slides.forEach(s => s.classList.remove('active'));
       const active = document.querySelector(`.slide-canvas[data-index="${index}"]`);
       if (active) active.classList.add('active');
-      indicator.textContent = `${index} / ${totalSlides}`;
+      indicator.textContent = `0${index} / 0${totalSlides}`;
       notesSlideNum.textContent = index;
       notesText.innerHTML = notes[index].replace(/\\n/g, '<br>');
     }

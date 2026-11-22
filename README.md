@@ -57,10 +57,10 @@ Open **`http://localhost:5000`**.
 
 ## 📊 Presentation Decks
 
-### 1. Compact 5-Slide SRS Presentation Deck (Executive / Viva Format)
-Built strictly following the **Compact 5-Slide SRS Deck Structure** with balanced two-column layouts, clean visual hierarchy, and full presenter speech scripts:
-- **PowerPoint File (`.pptx`)**: [NutriCampus_5Slide_SRS_Deck.pptx](NutriCampus_5Slide_SRS_Deck.pptx) — Includes embedded **Speaker Notes** ("What to Say Out Loud") on every slide.
-- **Interactive Web Deck**: [public/srs_deck.html](public/srs_deck.html) — Navigate with Arrow keys / Spacebar, press **N** to view speaker scripts, and press **F** for Fullscreen.
+### 1. Compact 5-Slide SRS Presentation Deck (Executive Dark Professional)
+Built strictly following the **Compact 5-Slide SRS Deck Structure** with an executive corporate dark aesthetic (deep midnight slate `#0F172A`, refined cards, cobalt blue & emerald accents, and zero distracting emojis):
+- **PowerPoint File (`.pptx`)**: [NutriCampus_Executive_Dark_Deck.pptx](NutriCampus_Executive_Dark_Deck.pptx) — Includes embedded **Speaker Speech Notes** ("What to Say Out Loud") on every slide.
+- **Interactive Web Deck**: [public/srs_deck.html](public/srs_deck.html) — Navigate with Arrow keys / Spacebar, press **N** to view presenter speech scripts, and press **F** for Fullscreen.
 - **Regenerate Anytime**:
   ```bash
   python generate_5slide_srs_ppt.py
